@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaginatePipe } from './pipes/paginate.pipe';
 import { ChartsModule } from 'ng2-charts';
+import { AnalyticsComponent } from './components/analytics/analytics.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ChartsModule } from 'ng2-charts';
     StatisticComponent,
     IndexComponent,
     GridComponent,
-    PaginatePipe
+    PaginatePipe,
+    AnalyticsComponent
   ],
   imports: [
     BrowserModule,

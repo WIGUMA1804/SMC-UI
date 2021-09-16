@@ -1,0 +1,65 @@
+<div
+  class="dropdown-content-graph"
+  style="padding-left: 20px; margin-bottom: 15px"
+>
+  <select
+    class="browser-default custom-select"
+    (change)="getCollections($event)"
+  >
+    <option selected value="default" disabled>Select a collection</option>
+    <option
+      *ngFor="let collection of collections; let i = index"
+      [value]="collection"
+    >
+      {{ collection }}
+    </option>
+  </select>
+</div>
+
+<div
+  class="dropdown-content-graph"
+  style="padding-left: 20px; margin-bottom: 15px"
+>
+  <select
+    class="browser-default custom-select"
+    (change)="getCollections($event)"
+  >
+    <option selected value="default" disabled>Select first variable</option>
+    <option *ngFor="let variable of displayedColumns" [value]="variable">
+      {{ variable }}
+    </option>
+  </select>
+</div>
+
+<div
+  class="dropdown-content-graph"
+  style="padding-left: 20px; margin-bottom: 15px"
+>
+  <select
+    class="browser-default custom-select"
+    (change)="getCollections($event)"
+  >
+    <option selected value="default" disabled>Select second variable</option>
+    <option *ngFor="let variable of displayedColumns" [value]="variable">
+      {{ variable }}
+    </option>
+  </select>
+</div>
+
+<div
+  class="dropdown-content-graph"
+  style="padding-left: 20px; padding-right: 20px; margin-bottom: 15px"
+>
+  <table style="margin-top: 5vh; border: 1px solid black">
+    <thead>
+      <tr>
+        <th>Mean</th>
+        <th>Mean_se</th>
+        <th>Mean_ci_lower</th>
+        <th>Mean_ci_upper</th>
+        <th>Obs_ci_lower</th>
+        <th>Obs_ci_upper</th>
+      </tr>
+    </thead>
+  </table>
+</div>

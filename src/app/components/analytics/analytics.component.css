@@ -1,0 +1,75 @@
+.main-content {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  table {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  
+  .dropdown-content {
+    margin-bottom: 20px;
+  }
+  
+  .btn-content-pagination {
+    display: flex;
+    flex-direction: row;
+    margin: 0px;
+    padding: 0px;
+  }
+  
+  button {
+    margin-left: 10px;
+    width: 50px;
+    height: 30px;
+    font-size: 9px;
+  }
+  
+  .label-title-table {
+    font-size: 9px;
+  }
+  
+  .page-label {
+    font-size: 10px;
+    margin-left: 20px;
+    font-weight: bold;
+  }
+  
+  .secondary-content {
+    padding-left: 20px;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .statistic-content p {
+    font-size: 10px;
+    margin-bottom: 5px;
+  }
+  
+  tbody td {
+    text-align: center;
+    font-size: 10px;
+  }
+  
+  .tendence-graphs {
+    /* border: 1px solid lightgrey; */
+    width: 145vh;
+    /* margin-left: 1vh; */
+  }
+  
+  .graph-content {
+    width: 75%;
+    margin: 0 auto;
+  }
+  
+  .title-graph {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .deactive-div {
+    pointer-events: none;
+    opacity: 0.4;
+  }
+  

@@ -4,4 +4,12 @@
   </div>
 </div>
 <hr>
-<app-grid></app-grid>
+<div style="display: flex; flex-direction: row; margin-bottom: 3vh;">
+  <div style="border: 1px solid black; text-align: center; background-color: #BDECB6;  width: 100%;">
+    <div style="display: flex; flex-direction: row; padding: 10px;">
+      <li routerLink="" routerLinkActive="active" style="margin-right: 10px; cursor: pointer;">Statistics</li>
+      <li routerLink="analytics" routerLinkActive="active" style="cursor: pointer; margin-left: 20px;">Analytics</li>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
