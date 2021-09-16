@@ -1,0 +1,235 @@
+<div class="main-content">
+  <p style="font-style: oblique; font-size: 12px; color: red">
+    Data per collection
+  </p>
+  <div class="dropdown-content">
+    <select
+      class="browser-default custom-select"
+      (change)="getCollections($event)"
+    >
+      <option selected value="default" disabled>Select a collection</option>
+      <option
+        *ngFor="let collection of collections; let i = index"
+        [value]="collection"
+      >
+        {{ collection }}
+      </option>
+    </select>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="label-title-table">SIFOC_sif401_LEC</th>
+        <th class="label-title-table">SIFOC_sif402_LEC</th>
+        <th class="label-title-table">SIFOC_sif405_V1</th>
+        <th class="label-title-table">SIFOC_sif405_V2</th>
+        <th class="label-title-table">SIFOC_sif407_V1</th>
+        <th class="label-title-table">SIFOC_sif407_V2</th>
+        <th class="label-title-table">SIFOC_sif407_V3</th>
+        <th class="label-title-table">SIFOC_sif408_ROBOT</th>
+        <th class="label-title-table">SIFOC_sif409_LEC</th>
+        <th class="label-title-table">SetV</th>
+        <th class="label-title-table">SetV_1</th>
+        <th class="label-title-table">SetV_2</th>
+        <th class="label-title-table">MESPAEA_rVoltage</th>
+        <th class="label-title-table">MESPAEA_rCurrent</th>
+        <th class="label-title-table">MESPAEA_rPowerFactor</th>
+        <th class="label-title-table">MESPAEA_rActivePower</th>
+        <th class="label-title-table">MESPAEA_udiEnergyConsumed</th>
+        <th class="label-title-table">MESPAEA_rAir</th>
+        <th class="label-title-table">MESPAEA_udiAirConsumed</th>
+        <th class="label-title-table">Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let collection of dataSource | paginate: page">
+        <td>{{ collection.SIFOC_sif401_LEC }}</td>
+        <td>{{ collection.SIFOC_sif402_LEC }}</td>
+        <td>{{ collection.SIFOC_sif405_V1 }}</td>
+        <td>{{ collection.SIFOC_sif405_V2 }}</td>
+        <td>{{ collection.SIFOC_sif407_V1 }}</td>
+        <td>{{ collection.SIFOC_sif407_V2 }}</td>
+        <td>{{ collection.SIFOC_sif407_V3 }}</td>
+        <td>{{ collection.SIFOC_sif408_ROBOT }}</td>
+        <td>{{ collection.SIFOC_sif409_LEC }}</td>
+        <td>{{ collection.SetV }}</td>
+        <td>{{ collection.SetV_1 }}</td>
+        <td>{{ collection.SetV_2 }}</td>
+        <td>{{ collection.MESPAEA_rVoltage }}</td>
+        <td>{{ collection.MESPAEA_rCurrent }}</td>
+        <td>{{ collection.MESPAEA_rPowerFactor }}</td>
+        <td>{{ collection.MESPAEA_rActivePower }}</td>
+        <td>{{ collection.MESPAEA_udiEnergyConsumed }}</td>
+        <td>{{ collection.MESPAEA_rAir }}</td>
+        <td>{{ collection.MESPAEA_udiAirConsumed }}</td>
+        <td>
+          <span>{{ collection.Hora }}</span> <span>:</span
+          ><span>{{ collection.minutos }}</span
+          ><span>:</span><span>{{ collection.Segundos }}</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="btn-content-pagination">
+    <button class="btn btn btn-secondary" (click)="previousPage()">
+      < -10
+    </button>
+    <button class="btn btn-secondary" (click)="nextPage()">+10 ></button>
+    <p class="page-label">page: {{ (page + 10) / 10 }} / {{ lenghtWindow }}</p>
+  </div>
+</div>
+
+<hr />
+
+<div class="secondary-content">
+  <div class="statistics-options" [class]="deactivate()">
+    <div class="dropdown-content">
+      <p style="font-style: oblique; font-size: 12px; color: red">
+        Measures of central tendency associated with a collection
+      </p>
+      <p
+        style="
+          font-style: oblique;
+          font-weight: bold;
+          font-size: 12px;
+          color: red;
+          border: 1px solid red;
+          width: 15vh;
+        "
+      >
+        Collection: {{ collectionToShow }}
+      </p>
+      <select
+        class="browser-default custom-select"
+        (change)="getVariables($event)"
+      >
+        <option selected value="default" disabled>Select a variable</option>
+        <option
+          *ngFor="let variable of displayedColumns; let i = index"
+          [value]="variable"
+        >
+          {{ variable }}
+        </option>
+      </select>
+    </div>
+
+    <ul>
+      <div class="">
+        <li>
+          <p>
+            Average:
+            <span style="font-weight: bold; color: red">{{ average }}</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            Median:
+            <span style="font-weight: bold; color: red">{{ median }}</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            Mode: <span style="font-weight: bold; color: red">{{ mode }}</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            Variance:
+            <span style="font-weight: bold; color: red">{{ variance }}</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            Standard deviation:
+            <span style="font-weight: bold; color: red">{{ deviation }}</span>
+          </p>
+        </li>
+      </div>
+    </ul>
+  </div>
+  <div class="tendence-graphs">
+    <div class="title-graph">
+      <p
+        style="
+          font-style: oblique;
+          font-size: 12px;
+          color: red;
+          text-align: center;
+        "
+      >
+        Plotting of the main consumption variables associated with all
+        collections.
+      </p>
+      <div style="padding-left: 20px; font-size: 10px; font-style: oblique">
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            (change)="checkChangedHistogram($event)"
+            name="flexRadioDefault"
+            id="flexRadioDefault2"
+            checked
+          />
+          <label class="form-check-label" for="flexRadioDefault2">
+            Tendence plot
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            (change)="checkChangedFrecuency($event)"
+            name="flexRadioDefault"
+            id="flexRadioDefault1"
+          />
+          <label class="form-check-label" for="flexRadioDefault1">
+            Histogram plot
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="dropdown-content-graph" style="padding-left: 20px">
+      <select
+        class="browser-default custom-select"
+        (change)="getCollections_($event)"
+        *ngIf="count >= 6 && frecuencyIsChecked"
+      >
+        <option selected value="default" disabled>Select a variable</option>
+        <option
+          *ngFor="let variable of displayedColumns_; let i = index"
+          [value]="variable"
+        >
+          {{ variable }}
+        </option>
+      </select>
+    </div>
+    <div class="graph-content" style="margin-bottom: 30px">
+      <canvas
+        baseChart
+        [chartType]="'bar'"
+        [legend]="true"
+        [datasets]="setCharData"
+        [labels]="chartLabels"
+        [options]="chartOptions"
+        *ngIf="frecuencyIsChecked"
+      >
+      </canvas>
+    </div>
+    <div class="chart-wrapper" style="width: 100%">
+      <canvas
+        baseChart
+        [datasets]="lineChartData"
+        [labels]="lineChartLabels"
+        [options]="lineChartOptions"
+        [colors]="lineChartColors"
+        [legend]="lineChartLegend"
+        [chartType]="lineChartType"
+        [plugins]="lineChartPlugins"
+        *ngIf="histogramIsChecked"
+      >
+      </canvas>
+    </div>
+  </div>
+</div>
