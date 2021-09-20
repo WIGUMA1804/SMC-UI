@@ -13,6 +13,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaginatePipe } from './pipes/paginate.pipe';
 import { ChartsModule } from 'ng2-charts';
 import { AnalyticsComponent } from './components/analytics/analytics.component';
+import * as PlotlyJS from 'plotly.js-dist-min';
+import { PlotlyModule } from 'angular-plotly.js';
+
+PlotlyModule.plotlyjs = PlotlyJS;
 
 @NgModule({
   declarations: [
@@ -22,7 +26,7 @@ import { AnalyticsComponent } from './components/analytics/analytics.component';
     IndexComponent,
     GridComponent,
     PaginatePipe,
-    AnalyticsComponent
+    AnalyticsComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,12 +34,11 @@ import { AnalyticsComponent } from './components/analytics/analytics.component';
     HttpClientModule,
     CommonModule,
     BrowserAnimationsModule,
-    ChartsModule
+    ChartsModule,
+    PlotlyModule,
   ],
-  exports: [
-    BrowserAnimationsModule
-  ],
+  exports: [BrowserAnimationsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -27,3 +27,20 @@ export interface dataset {
   data: number[];
   label: string;
 }
+
+export interface dataCore {
+  x: string[];
+  y: number[];
+  type: string;
+  mode?: string;
+  marker?: {};
+}
+
+export interface dataPlot {
+  data: dataCore[];
+  layout: {
+    width: number;
+    height: number;
+    title: string;
+  };
+}

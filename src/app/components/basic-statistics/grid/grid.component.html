@@ -1,5 +1,4 @@
 <div class="main-content">
-
   <p style="font-style: oblique; font-size: 12px; color: red">
     Data per collection
   </p>
@@ -206,7 +205,7 @@
         </option>
       </select>
     </div>
-    <div class="graph-content" style="margin-bottom: 30px">
+    <!-- <div class="graph-content" style="margin-bottom: 30px">
       <canvas
         baseChart
         [chartType]="'bar'"
@@ -231,6 +230,10 @@
         *ngIf="histogramIsChecked"
       >
       </canvas>
-    </div>
+    </div> -->
+
+    <!--  -->
+
+    <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>'
   </div>
 </div>
