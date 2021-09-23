@@ -32,6 +32,7 @@ export interface dataCore {
   x: string[];
   y: number[];
   type: string;
+  name?: string;
   mode?: string;
   marker?: {};
 }

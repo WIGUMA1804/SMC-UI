@@ -41,22 +41,12 @@ export class AnalyticsComponent implements OnInit {
         marker: {},
       },
     ],
-    layout: { width: 1500, height: 400, title: 'A Fancy Plot' },
+    layout: { width: 1500, height: 400, title: 'Regression result' },
   };
 
   constructor() {}
 
   ngOnInit(): void {
-    // this.graph.data[0].x = [1, 2, 3];
-    // this.graph.data[0].y = [2, 6, 3];
-    // this.graph.data[0].type = 'scatter';
-    // this.graph.data[0].mode = 'lines+points';
-    // this.graph.data[0].marker = {color: 'red'}
-
-    // this.graph.data[1].x = [1, 2, 3];
-    // this.graph.data[1].y = [2, 5, 3];
-    // this.graph.data[1].type = 'bar';
-
   }
 
   getCollections(e: any) {

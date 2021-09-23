@@ -84,7 +84,11 @@
 <hr />
 
 <div class="secondary-content">
-  <div class="statistics-options" [class]="deactivate()">
+  <div
+    class="statistics-options"
+    [class]="deactivate()"
+    style="border: 1px solid gainsboro; padding: 15px; height: 63vh"
+  >
     <div class="dropdown-content">
       <p style="font-style: oblique; font-size: 12px; color: red">
         Measures of central tendency associated with a collection
@@ -149,91 +153,112 @@
       </div>
     </ul>
   </div>
-  <div class="tendence-graphs">
-    <div class="title-graph">
-      <p
-        style="
-          font-style: oblique;
-          font-size: 12px;
-          color: red;
-          text-align: center;
-        "
-      >
-        Plotting of the main consumption variables associated with all
-        collections.
-      </p>
-      <div style="padding-left: 20px; font-size: 10px; font-style: oblique">
-        <div class="form-check form-check-inline">
-          <input
-            class="form-check-input"
-            type="radio"
-            (change)="checkChangedHistogram($event)"
-            name="flexRadioDefault"
-            id="flexRadioDefault2"
-            checked
-          />
-          <label class="form-check-label" for="flexRadioDefault2">
-            Tendence plot
-          </label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input
-            class="form-check-input"
-            type="radio"
-            (change)="checkChangedFrecuency($event)"
-            name="flexRadioDefault"
-            id="flexRadioDefault1"
-          />
-          <label class="form-check-label" for="flexRadioDefault1">
-            Histogram plot
-          </label>
-        </div>
+  <div
+    class="tendence-graphs"
+    style="
+      border: 1px solid gainsboro;
+      margin-left: 20px;
+      width: 157vh;
+      height: 63vh;
+    "
+  >
+    <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>'
+    <div style="margin-left: 20px;">
+      <p>Select a variable:</p>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="MESPAEA_rVoltage"
+          value="MESPAEA_rVoltage"
+          (change)="selectGraph($event)"
+          [checked]="isCheckedVol"
+          
+        />
+        <label class="form-check-label" for="inlineCheckbox1"
+          >MESPAEA_rVoltage</label
+        >
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="inlineCheckbox2"
+          value="MESPAEA_rCurrent"
+          (change)="selectGraph($event)"
+          [checked]="isCheckedCur"
+        />
+        <label class="form-check-label" for="inlineCheckbox2"
+          >MESPAEA_rCurrent</label
+        >
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="inlineCheckbox1"
+          value="MESPAEA_rPowerFactor"
+          (change)="selectGraph($event)"
+          [checked]="isCheckedPf"
+        />
+        <label class="form-check-label" for="inlineCheckbox1"
+          >MESPAEA_rPowerFactor</label
+        >
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="inlineCheckbox2"
+          value="MESPAEA_rActivePower"
+          (change)="selectGraph($event)"
+          [checked]="isCheckedAp"
+        />
+        <label class="form-check-label" for="inlineCheckbox2"
+          >MESPAEA_rActivePower</label
+        >
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="inlineCheckbox1"
+          value="MESPAEA_udiEnergyConsumed"
+          (change)="selectGraph($event)"
+          [checked]="isCheckedEne"
+        />
+        <label class="form-check-label" for="inlineCheckbox1"
+          >MESPAEA_udiEnergyConsumed</label
+        >
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="inlineCheckbox2"
+          value="MESPAEA_rAir"
+          (change)="selectGraph($event)"
+          [checked]="isCheckedAir"
+          [disabled]="activeAir"
+        />
+        <label class="form-check-label" for="inlineCheckbox2"
+          >MESPAEA_rAir</label
+        >
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="inlineCheckbox2"
+          value="MESPAEA_udiAirConsumed"
+          (change)="selectGraph($event)"
+          [checked]="isCheckedACo"
+          [disabled]="activeAir"
+        />
+        <label class="form-check-label" for="inlineCheckbox2"
+          >MESPAEA_udiAirConsumed</label
+        >
       </div>
     </div>
-    <div class="dropdown-content-graph" style="padding-left: 20px">
-      <select
-        class="browser-default custom-select"
-        (change)="getCollections_($event)"
-        *ngIf="count >= 6 && frecuencyIsChecked"
-      >
-        <option selected value="default" disabled>Select a variable</option>
-        <option
-          *ngFor="let variable of displayedColumns_; let i = index"
-          [value]="variable"
-        >
-          {{ variable }}
-        </option>
-      </select>
-    </div>
-    <!-- <div class="graph-content" style="margin-bottom: 30px">
-      <canvas
-        baseChart
-        [chartType]="'bar'"
-        [legend]="true"
-        [datasets]="setCharData"
-        [labels]="chartLabels"
-        [options]="chartOptions"
-        *ngIf="frecuencyIsChecked"
-      >
-      </canvas>
-    </div>
-    <div class="chart-wrapper" style="width: 100%">
-      <canvas
-        baseChart
-        [datasets]="lineChartData"
-        [labels]="lineChartLabels"
-        [options]="lineChartOptions"
-        [colors]="lineChartColors"
-        [legend]="lineChartLegend"
-        [chartType]="lineChartType"
-        [plugins]="lineChartPlugins"
-        *ngIf="histogramIsChecked"
-      >
-      </canvas>
-    </div> -->
-
-    <!--  -->
-
-    <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>'
   </div>
 </div>
