@@ -45,3 +45,9 @@ export interface dataPlot {
     title: string;
   };
 }
+
+export interface Ihora {
+  Hora: number;
+  minutos: number;
+  Segundos: number;
+}
