@@ -118,12 +118,12 @@ export class GridComponent implements OnInit {
       marker: {},
     },
   ];
-  time401: string[] = [];
-  time402 = [];
-  time405 = [];
-  time407 = [];
-  time408 = [];
-  time409 = [];
+  time401: Date[] = [];
+  time402: Date[] = [];
+  time405: Date[] = [];
+  time407: Date[] = [];
+  time408: Date[] = [];
+  time409: Date[] = [];
 
   public graph: dataPlot = {
     data: this.dataCore,
@@ -680,7 +680,7 @@ export class GridComponent implements OnInit {
 
   getCollections(e: any) {
     this.graph.data.forEach((item) => {
-      item.x = this.axisX.data;
+      item.x = [];
       item.y = [];
     });
     this.resetCheckboxes();
@@ -693,40 +693,27 @@ export class GridComponent implements OnInit {
       if (this.collection === 'SIF_401') {
         this.activeAir = false;
         this.collection401 = response;
-        this.time401 = this.collection401.map((item: Ihora) => {
-          return `${item.Hora}:${item.minutos}:${item.Segundos}`
-        });
-
+        this.collection401.forEach((item: any)=> {this.time401.push((new Date(item.Time.$date)))});
       }
       if (this.collection === 'SIF_402') {
         this.collection402 = response;
-        this.time402 = this.collection402.map((item: Ihora) => {
-          return `${item.Hora}:${item.minutos}:${item.Segundos}`
-        });
+        this.collection402.forEach((item: any)=> {this.time402.push((new Date(item.Time.$date)))});
       }
       if (this.collection === 'SIF_405') {
         this.collection405 = response;
-        this.time405 = this.collection405.map((item: Ihora) => {
-          return `${item.Hora}:${item.minutos}:${item.Segundos}`
-        });
+        this.collection405.forEach((item: any)=> {this.time405.push((new Date(item.Time.$date)))});
       }
       if (this.collection === 'SIF_407') {
         this.collection407 = response;
-        this.time407 = this.collection407.map((item: Ihora) => {
-          return `${item.Hora}:${item.minutos}:${item.Segundos}`
-        });
+        this.collection407.forEach((item: any)=> {this.time407.push((new Date(item.Time.$date)))});
       }
       if (this.collection === 'SIF_408') {
         this.collection408 = response;
-        this.time408 = this.collection408.map((item: Ihora) => {
-          return `${item.Hora}:${item.minutos}:${item.Segundos}`
-        });
+        this.collection408.forEach((item: any)=> {this.time408.push((new Date(item.Time.$date)))});
       }
       if (this.collection === 'SIF_409') {
         this.collection409 = response;
-        this.time409 = this.collection409.map((item: Ihora) => {
-          return `${item.Hora}:${item.minutos}:${item.Segundos}`
-        });
+        this.collection409.forEach((item: any)=> {this.time409.push((new Date(item.Time.$date)))});
       }
       this.clearVariables();
       this.updateCollection(this.collectionData);
@@ -744,6 +731,7 @@ export class GridComponent implements OnInit {
         MESPAEA_udiEnergyConsumed: Number(collect.MESPAEA_udiEnergyConsumed),
         MESPAEA_rAir: Number(collect?.MESPAEA_rAir),
         MESPAEA_udiAirConsumed: Number(collect?.MESPAEA_udiAirConsumed),
+        Time: new Date(collect.Time.$date),
         Hora: collect.Hora,
         minutos: collect.minutos,
         Segundos: collect.Segundos,
@@ -1007,6 +995,7 @@ export class GridComponent implements OnInit {
     }
   }
 
+
   selectGraph(event: any) {
     this.isChecked = event.target.checked;
     let variable = event.target.value;
@@ -1020,6 +1009,11 @@ export class GridComponent implements OnInit {
           this.rVoltage.push(Number(element.MESPAEA_rVoltage.toFixed(4)))
         );
         console.log(this.time401);
+        this.time402 = [];
+        this.time405 = [];
+        this.time407=  [];
+        this.time408 = [];
+        this.time409 = [];
         this.graph.data[0].x = this.time401;
         this.graph.data[0].y = this.normalize(this.rVoltage);
         this.graphConfiguration(variable);
@@ -1030,6 +1024,11 @@ export class GridComponent implements OnInit {
         this.collection402.map((element: any) =>
           this.rVoltage.push(Number(element.MESPAEA_rVoltage.toFixed(4)))
         );
+        this.time401 = [];
+        this.time405 = [];
+        this.time407=  [];
+        this.time408 = [];
+        this.time409 = [];
         this.graph.data[0].x = this.time402;
         this.graph.data[0].y = this.normalize(this.rVoltage);
         this.graphConfiguration(variable);
@@ -1040,6 +1039,11 @@ export class GridComponent implements OnInit {
         this.collection405.map((element: any) =>
           this.rVoltage.push(Number(element.MESPAEA_rVoltage.toFixed(4)))
         );
+        this.time401 = [];
+        this.time402 = [];
+        this.time407=  [];
+        this.time408 = [];
+        this.time409 = [];
         this.graph.data[0].x = this.time405;
         this.graph.data[0].y = this.normalize(this.rVoltage);
         this.graphConfiguration(variable);
@@ -1050,6 +1054,11 @@ export class GridComponent implements OnInit {
         this.collection407.map((element: any) =>
           this.rVoltage.push(Number(element.MESPAEA_rVoltage.toFixed(4)))
         );
+        this.time401 = [];
+        this.time402 = [];
+        this.time405=  [];
+        this.time408 = [];
+        this.time409 = [];
         this.graph.data[0].x = this.time407;
         this.graph.data[0].y = this.normalize(this.rVoltage);
         this.graphConfiguration(variable);
@@ -1060,6 +1069,11 @@ export class GridComponent implements OnInit {
         this.collection408.map((element: any) =>
           this.rVoltage.push(Number(element.MESPAEA_rVoltage.toFixed(4)))
         );
+        this.time401 = [];
+        this.time402 = [];
+        this.time405=  [];
+        this.time407 = [];
+        this.time409 = [];
         this.graph.data[0].x = this.time408;
         this.graph.data[0].y = this.normalize(this.rVoltage);
         this.graphConfiguration(variable);
@@ -1070,6 +1084,11 @@ export class GridComponent implements OnInit {
         this.collection409.map((element: any) =>
           this.rVoltage.push(Number(element.MESPAEA_rVoltage.toFixed(4)))
         );
+        this.time401 = [];
+        this.time402 = [];
+        this.time405=  [];
+        this.time407 = [];
+        this.time408 = [];
         this.graph.data[0].x = this.time409;
         this.graph.data[0].y = this.normalize(this.rVoltage);
         this.graphConfiguration(variable);
@@ -1088,7 +1107,7 @@ export class GridComponent implements OnInit {
         this.collection401.map((element: any) =>
           this.rCurrent.push(Number(element.MESPAEA_rCurrent.toFixed(4)))
         );
-        this.graph.data[1].x = this.time401;;
+        this.graph.data[1].x = this.time401;
         this.graph.data[1].y = this.normalize(this.rCurrent);
         this.graphConfiguration(variable);
       }
@@ -1158,7 +1177,7 @@ export class GridComponent implements OnInit {
             Number(element.MESPAEA_rPowerFactor.toFixed(4))
           )
         );
-        this.graph.data[2].x = this.time401;;
+        this.graph.data[2].x = this.time401;
         this.graph.data[2].y = this.normalize(this.rPowerFactor);
         this.graphConfiguration(variable);
       }
@@ -1238,7 +1257,7 @@ export class GridComponent implements OnInit {
             Number(element.MESPAEA_rActivePower.toFixed(4))
           )
         );
-        this.graph.data[3].x = this.time401;;
+        this.graph.data[3].x = this.time401;
         this.graph.data[3].y = this.normalize(this.rActivePower);
         this.graphConfiguration(variable);
       }
@@ -1316,7 +1335,7 @@ export class GridComponent implements OnInit {
         this.collection401.map((element: any) =>
           this.udiEnergyConsumed.push(Number(element.MESPAEA_udiEnergyConsumed))
         );
-        this.graph.data[4].x = this.time401;;
+        this.graph.data[4].x = this.time401;
         this.graph.data[4].y = this.normalize(this.udiEnergyConsumed);
         this.graphConfiguration(variable);
       }
@@ -1324,9 +1343,7 @@ export class GridComponent implements OnInit {
       if (this.collectionToShow === 'SIF_402') {
         console.log('pintar ec sif2');
         this.collection402.map((element: any) =>
-          this.udiEnergyConsumed.push(
-            Number(element.MESPAEA_udiEnergyConsumed)
-          )
+          this.udiEnergyConsumed.push(Number(element.MESPAEA_udiEnergyConsumed))
         );
         this.graph.data[4].x = this.time402;
         this.graph.data[4].y = this.normalize(this.udiEnergyConsumed);
@@ -1336,9 +1353,7 @@ export class GridComponent implements OnInit {
       if (this.collectionToShow === 'SIF_405') {
         console.log('pintar ec sif5');
         this.collection405.map((element: any) =>
-          this.udiEnergyConsumed.push(
-            Number(element.MESPAEA_udiEnergyConsumed)
-          )
+          this.udiEnergyConsumed.push(Number(element.MESPAEA_udiEnergyConsumed))
         );
         this.graph.data[4].x = this.time405;
         this.graph.data[4].y = this.normalize(this.udiEnergyConsumed);
@@ -1348,9 +1363,7 @@ export class GridComponent implements OnInit {
       if (this.collectionToShow === 'SIF_407') {
         console.log('pintar ec sif7');
         this.collection407.map((element: any) =>
-          this.udiEnergyConsumed.push(
-            Number(element.MESPAEA_udiEnergyConsumed)
-          )
+          this.udiEnergyConsumed.push(Number(element.MESPAEA_udiEnergyConsumed))
         );
         this.graph.data[4].x = this.time407;
         this.graph.data[4].y = this.normalize(this.udiEnergyConsumed);
@@ -1360,9 +1373,7 @@ export class GridComponent implements OnInit {
       if (this.collectionToShow === 'SIF_408') {
         console.log('pintar ec sif8');
         this.collection408.map((element: any) =>
-          this.udiEnergyConsumed.push(
-            Number(element.MESPAEA_udiEnergyConsumed)
-          )
+          this.udiEnergyConsumed.push(Number(element.MESPAEA_udiEnergyConsumed))
         );
         this.graph.data[4].x = this.time408;
         this.graph.data[4].y = this.normalize(this.udiEnergyConsumed);
@@ -1372,9 +1383,7 @@ export class GridComponent implements OnInit {
       if (this.collectionToShow === 'SIF_409') {
         console.log('pintar ec sif9');
         this.collection409.map((element: any) =>
-          this.udiEnergyConsumed.push(
-            Number(element.MESPAEA_udiEnergyConsumed)
-          )
+          this.udiEnergyConsumed.push(Number(element.MESPAEA_udiEnergyConsumed))
         );
         this.graph.data[4].x = this.time409;
         this.graph.data[4].y = this.normalize(this.udiEnergyConsumed);
@@ -1394,7 +1403,7 @@ export class GridComponent implements OnInit {
         this.collection401.map((element: any) =>
           this.rAir.push(Number(element.MESPAEA_rAir.toFixed(4)))
         );
-        this.graph.data[5].x = this.time401;;
+        this.graph.data[5].x = this.time401;
         this.graph.data[5].y = this.normalize(this.rAir);
         this.graphConfiguration(variable);
       }
@@ -1410,11 +1419,9 @@ export class GridComponent implements OnInit {
       if (this.collectionToShow === 'SIF_401') {
         console.log('pintar ac sif1');
         this.collection401.map((element: any) =>
-          this.udiAirConsumed.push(
-            Number(element.MESPAEA_udiAirConsumed)
-          )
+          this.udiAirConsumed.push(Number(element.MESPAEA_udiAirConsumed))
         );
-        this.graph.data[6].x = this.time401;;
+        this.graph.data[6].x = this.time401;
         this.graph.data[6].y = this.normalize(this.udiAirConsumed);
         this.graphConfiguration(variable);
       }

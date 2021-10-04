@@ -9,6 +9,7 @@ export interface SifocVariables {
   Hora: number;
   minutos: number;
   Segundos: number;
+  Time: Date;
   SIFOC_sif401_LEC?: number;
   SIFOC_sif402_LEC?: number;
   SIFOC_sif405_V1?: number;
@@ -29,7 +30,7 @@ export interface dataset {
 }
 
 export interface dataCore {
-  x: string[];
+  x: Date[];
   y: number[];
   type: string;
   name?: string;
