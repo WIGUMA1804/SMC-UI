@@ -6,10 +6,8 @@ export interface SifocVariables {
   MESPAEA_rVoltage: number;
   MESPAEA_udiAirConsumed?: number;
   MESPAEA_udiEnergyConsumed: number;
-  Hora: number;
-  minutos: number;
-  Segundos: number;
   Time: Date;
+  Alarma: boolean;
   SIFOC_sif401_LEC?: number;
   SIFOC_sif402_LEC?: number;
   SIFOC_sif405_V1?: number;

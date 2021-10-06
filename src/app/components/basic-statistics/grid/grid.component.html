@@ -40,6 +40,7 @@
         <th class="label-title-table">MESPAEA_rAir</th>
         <th class="label-title-table">MESPAEA_udiAirConsumed</th>
         <th class="label-title-table">Time</th>
+        <th class="label-title-table">Alarma</th>
       </tr>
     </thead>
     <tbody>
@@ -63,11 +64,9 @@
         <td>{{ collection.MESPAEA_udiEnergyConsumed }}</td>
         <td>{{ collection.MESPAEA_rAir }}</td>
         <td>{{ collection.MESPAEA_udiAirConsumed }}</td>
-        <td>
-          <span>{{ collection.Hora }}</span> <span>:</span
-          ><span>{{ collection.minutos }}</span
-          ><span>:</span><span>{{ collection.Segundos }}</span>
-        </td>
+        <td>{{ collection.Time }}</td>
+        <td>{{ collection.Alarma }}</td>
+
       </tr>
     </tbody>
   </table>
@@ -162,8 +161,8 @@
       height: 63vh;
     "
   >
-    <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>'
-    <div style="margin-left: 20px;">
+    <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>
+    <div style="margin-left: 20px">
       <p>Select a variable:</p>
       <div class="form-check form-check-inline">
         <input
@@ -173,7 +172,6 @@
           value="MESPAEA_rVoltage"
           (change)="selectGraph($event)"
           [checked]="isCheckedVol"
-          
         />
         <label class="form-check-label" for="inlineCheckbox1"
           >MESPAEA_rVoltage</label
@@ -239,7 +237,6 @@
           value="MESPAEA_rAir"
           (change)="selectGraph($event)"
           [checked]="isCheckedAir"
-          [disabled]="activeAir"
         />
         <label class="form-check-label" for="inlineCheckbox2"
           >MESPAEA_rAir</label
@@ -253,11 +250,54 @@
           value="MESPAEA_udiAirConsumed"
           (change)="selectGraph($event)"
           [checked]="isCheckedACo"
-          [disabled]="activeAir"
         />
         <label class="form-check-label" for="inlineCheckbox2"
           >MESPAEA_udiAirConsumed</label
         >
+      </div>
+
+      <div *ngIf="isActive401">
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="inlineCheckbox"
+            value="SIFOC_sif401_LEC"
+            (change)="selectGraphAux($event)"
+            [checked]="isCheckedSIFOC_sif401_LEC"
+          />
+          <label class="form-check-label" for="inlineCheckbox2"
+            >SIFOC_sif401_LEC</label
+          >
+        </div>
+  
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="inlineCheckbox"
+            value="SetV_1"
+            (change)="selectGraphAux($event)"
+            [checked]="isCheckedSetV_1"
+          />
+          <label class="form-check-label" for="inlineCheckbox2"
+            >SetV_1</label
+          >
+        </div>
+  
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="inlineCheckbox"
+            value="SetV_2"
+            (change)="selectGraphAux($event)"
+            [checked]="isCheckedSetV_2"
+          />
+          <label class="form-check-label" for="inlineCheckbox2"
+            >SetV_2</label
+          >
+        </div>
       </div>
     </div>
   </div>
