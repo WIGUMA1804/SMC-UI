@@ -1002,12 +1002,12 @@ export class GridComponent implements OnInit {
 
     if (variable === 'SetV_2' && this.isChecked_) {
       this.isCheckedSetV_2 = this.isChecked_;
-      this.graph.data[7].x = this.time401;
-      this.graph.data[7].y = this.normalize(this.SetV_2);
+      this.graph.data[9].x = this.time401;
+      this.graph.data[9].y = this.normalize(this.SetV_2);
     } else if (variable === 'SetV_2' && !this.isChecked_) {
       console.log('borrar SetV_2');
-      this.graph.data[7].x = [];
-      this.graph.data[7].y = [];
+      this.graph.data[9].x = [];
+      this.graph.data[9].y = [];
     }
   }
 
