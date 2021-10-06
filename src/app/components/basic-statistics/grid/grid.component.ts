@@ -947,15 +947,13 @@ export class GridComponent implements OnInit {
     if (variable === 'MESPAEA_rAir' && this.isChecked) {
       this.isCheckedAir = this.isChecked;
 
-      if (this.collectionToShow === 'SIF_401') {
-        console.log('pintar rac sif1');
-        this.collection401.map((element: any) =>
-          this.rAir.push(Number(element.MESPAEA_rAir.toFixed(4)))
-        );
-        this.graph.data[5].x = this.time401;
-        this.graph.data[5].y = this.normalize(this.rAir);
-        this.graphConfiguration(variable);
-      }
+      console.log('pintar rac sif1');
+      this.collection401.map((element: any) =>
+        this.rAir.push(Number(element.MESPAEA_rAir.toFixed(4)))
+      );
+      this.graph.data[5].x = this.time401;
+      this.graph.data[5].y = this.normalize(this.rAir);
+      this.graphConfiguration(variable);
     } else if (variable === 'MESPAEA_rAir' && !this.isChecked) {
       console.log('borrar rac');
       this.graph.data[5].x = [];
@@ -965,15 +963,13 @@ export class GridComponent implements OnInit {
     if (variable === 'MESPAEA_udiAirConsumed' && this.isChecked) {
       this.isCheckedACo = this.isChecked;
 
-      if (this.collectionToShow === 'SIF_401') {
-        console.log('pintar ac sif1');
-        this.collection401.map((element: any) =>
-          this.udiAirConsumed.push(Number(element.MESPAEA_udiAirConsumed))
-        );
-        this.graph.data[6].x = this.time401;
-        this.graph.data[6].y = this.normalize(this.udiAirConsumed);
-        this.graphConfiguration(variable);
-      }
+      console.log('pintar ac sif1');
+      this.collection401.map((element: any) =>
+        this.udiAirConsumed.push(Number(element.MESPAEA_udiAirConsumed))
+      );
+      this.graph.data[6].x = this.time401;
+      this.graph.data[6].y = this.normalize(this.udiAirConsumed);
+      this.graphConfiguration(variable);
     } else if (variable === 'MESPAEA_udiAirConsumed' && !this.isChecked) {
       console.log('borrar ac');
       this.graph.data[6].x = [];
