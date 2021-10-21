@@ -1,0 +1,196 @@
+<div class="main-container">
+  <div
+    class="selector-container"
+    style="display: flex; flex-direction: row; justify-content: center"
+  >
+    <div class="column-md-2" style="margin: 0 40px 0 40px">
+      <div style="display: flex; flex-direction: row">
+        <p style="margin-top: 10px">SIF_401:</p>
+        <button
+          type="button"
+          class="btn btn-outline-success"
+          style="margin: 0px 0px 10px 10px"
+          (click)="cleanVariablesSif401()"
+        >
+          Clean
+        </button>
+      </div>
+      <select
+        class="browser-default custom-select"
+        (change)="getVariablesSif401($event)"
+        [disabled]="loading"
+      >
+        <option selected value="default" disabled>Select a variable</option>
+        <option
+          *ngFor="let variable of displayedColumnsSif401; let i = index"
+          [value]="variable"
+        >
+          {{ variable }}
+        </option>
+      </select>
+      <ul style="margin-top: 5px; padding-left: 17px">
+        <li *ngFor="let item of variablesSelectedSif401">{{ item }}</li>
+      </ul>
+    </div>
+    <div class="column-md-2" style="margin: 0 40px 0 40px">
+      <div style="display: flex; flex-direction: row">
+        <p style="margin-top: 10px">SIF_402:</p>
+        <button
+          type="button"
+          class="btn btn-outline-success"
+          style="margin: 0px 0px 10px 10px"
+          (click)="cleanVariablesSif402()"
+        >
+          Clean
+        </button>
+      </div>
+      <select
+        class="browser-default custom-select"
+        (change)="getVariablesSif402($event)"
+        [disabled]="loading"
+      >
+        <option selected value="default" disabled>Select a variable</option>
+        <option
+          *ngFor="let variable of displayedColumnsSif402; let i = index"
+          [value]="variable"
+        >
+          {{ variable }}
+        </option>
+      </select>
+      <ul style="margin-top: 5px; padding-left: 17px">
+        <li *ngFor="let item of variablesSelectedSif402">{{ item }}</li>
+      </ul>
+    </div>
+    <div class="column-md-2" style="margin: 0 40px 0 40px">
+      <div style="display: flex; flex-direction: row">
+        <p style="margin-top: 10px">SIF_405:</p>
+        <button
+          type="button"
+          class="btn btn-outline-success"
+          style="margin: 0px 0px 10px 10px"
+          (click)="cleanVariablesSif405()"
+        >
+          Clean
+        </button>
+      </div>
+      <select
+        class="browser-default custom-select"
+        (change)="getVariablesSif405($event)"
+        [disabled]="loading"
+      >
+        <option selected value="default" disabled>Select a variable</option>
+        <option
+          *ngFor="let variable of displayedColumnsSif405; let i = index"
+          [value]="variable"
+        >
+          {{ variable }}
+        </option>
+      </select>
+      <ul style="margin-top: 5px; padding-left: 17px">
+        <li *ngFor="let item of variablesSelectedSif405">{{ item }}</li>
+      </ul>
+    </div>
+    <div class="column-md-2" style="margin: 0 40px 0 40px">
+      <div style="display: flex; flex-direction: row">
+        <p style="margin-top: 10px">SIF_407:</p>
+        <button
+          type="button"
+          class="btn btn-outline-success"
+          style="margin: 0px 0px 10px 10px"
+          (click)="cleanVariablesSif407()"
+        >
+          Clean
+        </button>
+      </div>
+      <select
+        class="browser-default custom-select"
+        (change)="getVariablesSif407($event)"
+        [disabled]="loading"
+      >
+        <option selected value="default" disabled>Select a variable</option>
+        <option
+          *ngFor="let variable of displayedColumnsSif407; let i = index"
+          [value]="variable"
+        >
+          {{ variable }}
+        </option>
+      </select>
+      <ul style="margin-top: 5px; padding-left: 17px">
+        <li *ngFor="let item of variablesSelectedSif407">{{ item }}</li>
+      </ul>
+    </div>
+    <div class="column-md-2" style="margin: 0 40px 0 40px">
+      <div style="display: flex; flex-direction: row">
+        <p style="margin-top: 10px">SIF_408:</p>
+        <button
+          type="button"
+          class="btn btn-outline-success"
+          style="margin: 0px 0px 10px 10px"
+          (click)="cleanVariablesSif408()"
+        >
+          Clean
+        </button>
+      </div>
+      <select
+        class="browser-default custom-select"
+        (change)="getVariablesSif408($event)"
+        [disabled]="loading"
+      >
+        <option selected value="default" disabled>Select a variable</option>
+        <option
+          *ngFor="let variable of displayedColumnsSif408; let i = index"
+          [value]="variable"
+        >
+          {{ variable }}
+        </option>
+      </select>
+      <ul style="margin-top: 5px; padding-left: 17px">
+        <li *ngFor="let item of variablesSelectedSif408">{{ item }}</li>
+      </ul>
+    </div>
+    <div class="column-md-2" style="margin: 0 40px 0 40px">
+      <div style="display: flex; flex-direction: row">
+        <p style="margin-top: 10px">SIF_409:</p>
+        <button
+          type="button"
+          class="btn btn-outline-success"
+          style="margin: 0px 0px 10px 10px"
+          (click)="cleanVariablesSif409()"
+        >
+          Clean
+        </button>
+      </div>
+      <select
+        class="browser-default custom-select"
+        (change)="getVariablesSif409($event)"
+        [disabled]="loading"
+      >
+        <option selected value="default" disabled>Select a variable</option>
+        <option
+          *ngFor="let variable of displayedColumnsSif409; let i = index"
+          [value]="variable"
+        >
+          {{ variable }}
+        </option>
+      </select>
+      <ul style="margin-top: 5px; padding-left: 17px">
+        <li *ngFor="let item of variablesSelectedSif409">{{ item }}</li>
+      </ul>
+    </div>
+  </div>
+  <div
+    class="spinner-grow text-success spinner"
+    role="status"
+    *ngIf="loading"
+    style="
+      display: flex;
+      justify-content: center;
+      height: 5vh;
+      width: 5vh;
+      margin-top: 10vh;
+    "
+  ></div>
+  <div style="margin-top: 10vh">
+    <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>
+  </div>
+</div>

@@ -161,8 +161,11 @@
       height: 63vh;
     "
   >
+
     <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>
-    <div style="margin-left: 20px">
+    <div class="spinner-grow text-success spinner" role="status" *ngIf="loading" style="display: flex; justify-content: center; height: 5vh; width: 5vh;">
+    </div>
+    <div style="margin-left: 20px" >
       <p>Select a variable:</p>
       <div class="form-check form-check-inline">
         <input
@@ -255,6 +258,19 @@
           >MESPAEA_udiAirConsumed</label
         >
       </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="inlineCheckbox"
+          value="Alarma"
+          (change)="selectGraph($event)"
+          [checked]="isCheckedAlarm"
+        />
+        <label class="form-check-label" for="inlineCheckbox2"
+          >Alarma</label
+        >
+      </div>
 
       <div *ngIf="isActive401">
         <div class="form-check form-check-inline">
@@ -298,6 +314,110 @@
             >SetV_2</label
           >
         </div>
+      </div>
+
+      <div *ngIf="isActive402">
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="inlineCheckbox"
+            value="SIFOC_sif402_LEC"
+            (change)="selectGraphAuxSif402($event)"
+            [checked]="isCheckedSIFOC_sif402_LEC"
+          />
+          <label class="form-check-label" for="inlineCheckbox2"
+            >SIFOC_sif402_LEC</label
+          >
+        </div>
+
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="inlineCheckbox"
+            value="SetV_1"
+            (change)="selectGraphAuxSif402($event)"
+            [checked]="isCheckedSetV_1"
+          />
+          <label class="form-check-label" for="inlineCheckbox2"
+            >SetV_1</label
+          >
+        </div>
+  
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="inlineCheckbox"
+            value="SetV_2"
+            (change)="selectGraphAuxSif402($event)"
+            [checked]="isCheckedSetV_2"
+          />
+          <label class="form-check-label" for="inlineCheckbox2"
+            >SetV_2</label
+          >
+        </div>
+
+      </div>
+
+      <div *ngIf="isActive405">
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="inlineCheckbox"
+            value="SIFOC_sif405_V1"
+            (change)="selectGraphAuxSif405($event)"
+            [checked]="isCheckedSIFOC_sif405_V1"
+          />
+          <label class="form-check-label" for="inlineCheckbox2"
+            >SIFOC_sif405_V1</label
+          >
+        </div>
+
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="inlineCheckbox"
+            value="SIFOC_sif405_V2"
+            (change)="selectGraphAuxSif405($event)"
+            [checked]="isCheckedSIFOC_sif405_V2"
+          />
+          <label class="form-check-label" for="inlineCheckbox2"
+            >SIFOC_sif405_V2</label
+          >
+        </div>
+
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="inlineCheckbox"
+            value="SetV_1"
+            (change)="selectGraphAuxSif405($event)"
+            [checked]="isCheckedSetV_1"
+          />
+          <label class="form-check-label" for="inlineCheckbox2"
+            >SetV_1</label
+          >
+        </div>
+  
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="inlineCheckbox"
+            value="SetV_2"
+            (change)="selectGraphAuxSif405($event)"
+            [checked]="isCheckedSetV_2"
+          />
+          <label class="form-check-label" for="inlineCheckbox2"
+            >SetV_2</label
+          >
+        </div>
+
       </div>
     </div>
   </div>

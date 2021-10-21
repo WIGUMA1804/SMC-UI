@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GridComponent } from './components/basic-statistics/grid/grid.component';
 import { AnalyticsComponent } from './components/analytics/analytics.component';
+import { GraphsComponent } from './components/graphs/graphs.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path:'analytics',
     component: AnalyticsComponent
+  },
+  {
+    path:'graphs',
+    component: GraphsComponent
   },
   {
     path: '**',

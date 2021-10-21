@@ -15,6 +15,7 @@ import { ChartsModule } from 'ng2-charts';
 import { AnalyticsComponent } from './components/analytics/analytics.component';
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
+import { GraphsComponent } from './components/graphs/graphs.component';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -27,6 +28,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
     GridComponent,
     PaginatePipe,
     AnalyticsComponent,
+    GraphsComponent,
   ],
   imports: [
     BrowserModule,
