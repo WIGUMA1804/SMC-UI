@@ -405,7 +405,7 @@ export class GraphsComponent implements OnInit {
     },
   };
 
-  constructor(private statisticService: StatisticService) {}
+  constructor(private statisticService: StatisticService) { }
 
   ngOnInit(): void {
     this.getSuperset().then((resp: any) => {
@@ -500,9 +500,14 @@ export class GraphsComponent implements OnInit {
 
   configureTime(array: ISuperset) {
     array.Time?.forEach((item: any) => {
-      this.time.push(new Date(item.$date));
+      this.time.push(item);
+      // this.time.push(new Date(item.$date));
     });
-    this.time.sort();
+    // this.time.sort();
+
+    array.Tiempo?.forEach((item: any) => {
+      this.tiempo.push(item);
+    });
   }
 
   setV1(array: ISuperset) {
