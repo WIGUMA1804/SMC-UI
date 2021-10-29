@@ -208,6 +208,13 @@ export class GridComponent implements OnInit {
       mode: '',
       marker: {},
     },
+    {
+      x: [],
+      y: [],
+      type: '',
+      mode: '',
+      marker: {},
+    },
   ];
   time401: Date[] = [];
   time402: Date[] = [];
@@ -268,6 +275,22 @@ export class GridComponent implements OnInit {
   SIFOC_sif405_V2: number[] = [];
   isCheckedSIFOC_sif405_V1 = false;
   isCheckedSIFOC_sif405_V2 = false;
+  SIFOC_sif407_V1: number[] = [];
+  SIFOC_sif407_V2: number[] = [];
+  SIFOC_sif407_V3: number[] = [];
+  isCheckedSIFOC_sif407_V1 = false;
+  isCheckedSIFOC_sif407_V2 = false;
+  isCheckedSIFOC_sif407_V3 = false;
+  isActive407 = false;
+  SIFOC_sif408_ROBOT: number[] = [];
+  isCheckedSIFOC_sif408_ROBOT = false;
+  isActive408 = false;
+
+  SIFOC_sif409_LEC: number[] = [];
+  isCheckedSIFOC_sif409_LEC = false;
+  SetV: number[] = [];
+  isCheckedSetV = false;
+  isActive409 = false;
 
   constructor(private statisticService: StatisticService) {}
 
@@ -310,16 +333,21 @@ export class GridComponent implements OnInit {
       .getData(this.collection)
       .pipe(finalize(() => (this.loading = false)))
       .subscribe((response: any) => {
-        this.count++;
         this.collectionData = response;
+        console.log(this.collectionData);
+
         if (this.collection === 'SIF_401') {
           this.isActive401 = true;
           this.isActive402 = false;
           this.isActive405 = false;
+          this.isActive407 = false;
+          this.isActive408 = false;
+          this.isActive409 = false;
           this.collection401 = response;
           this.collection401.forEach((item: any) =>
             this.SIFOC_sif401_LEC.push(item.SIFOC_sif401_LEC)
           );
+          console.log(this.SIFOC_sif401_LEC);
           this.collection401.forEach((item: any) =>
             this.SetV_1.push(item.SetV_1)
           );
@@ -328,7 +356,7 @@ export class GridComponent implements OnInit {
           );
 
           this.collection401.forEach((item: any) => {
-            this.time401.push(new Date(item.Time?.$date));
+            this.time401.push(item.Time);
           });
           this.collection401.forEach((element: any) =>
             this.rAir.push(Number(element.MESPAEA_rAir?.toFixed(4)))
@@ -341,6 +369,9 @@ export class GridComponent implements OnInit {
           this.isActive401 = false;
           this.isActive402 = true;
           this.isActive405 = false;
+          this.isActive407 = false;
+          this.isActive408 = false;
+          this.isActive409 = false;
           this.collection402 = response;
           this.collection402.forEach((item: any) =>
             this.SIFOC_sif402_LEC.push(item.SIFOC_sif402_LEC)
@@ -352,17 +383,22 @@ export class GridComponent implements OnInit {
             this.SetV_2.push(item.SetV_2)
           );
           this.collection402.forEach((item: any) => {
-            this.time402.push(new Date(item.Time.$date));
+            this.time402.push(item.Time);
           });
         }
         if (this.collection === 'SIF_405') {
           this.isActive401 = false;
           this.isActive402 = false;
           this.isActive405 = true;
+          this.isActive407 = false;
+          this.isActive408 = false;
+          this.isActive409 = false;
           this.collection405 = response;
+
           this.collection405.forEach((item: any) => {
-            this.time405.push(new Date(item.Time.$date));
+            this.time405.push(item.Time);
           });
+
           this.collection405.forEach((item: any) => {
             if (item.SIFOC_sif405_V1) {
               this.SIFOC_sif405_V1.push(1);
@@ -370,6 +406,7 @@ export class GridComponent implements OnInit {
               this.SIFOC_sif405_V1.push(0);
             }
           });
+
           this.collection405.forEach((item: any) => {
             if (item.SIFOC_sif405_V2) {
               this.SIFOC_sif405_V2.push(1);
@@ -381,37 +418,108 @@ export class GridComponent implements OnInit {
           this.collection405.forEach((item: any) =>
             this.SetV_1.push(item.SetV_1)
           );
+
           this.collection405.forEach((item: any) =>
             this.SetV_2.push(item.SetV_2)
           );
         }
         if (this.collection === 'SIF_407') {
           this.isActive401 = false;
+          this.isActive402 = false;
+          this.isActive405 = false;
+          this.isActive407 = true;
+          this.isActive408 = false;
+          this.isActive409 = false;
           this.collection407 = response;
+
           this.collection407.forEach((item: any) => {
-            this.time407.push(new Date(item.Time.$date));
+            this.time407.push(item.Time);
           });
+
+          this.collection407.forEach((item: any) => {
+            if (item.SIFOC_sif407_V1) {
+              this.SIFOC_sif407_V1.push(1);
+            } else {
+              this.SIFOC_sif407_V1.push(0);
+            }
+          });
+
+          this.collection407.forEach((item: any) => {
+            if (item.SIFOC_sif407_V2) {
+              this.SIFOC_sif407_V2.push(1);
+            } else {
+              this.SIFOC_sif407_V2.push(0);
+            }
+          });
+
+          this.collection407.forEach((item: any) => {
+            if (item.SIFOC_sif407_V3) {
+              this.SIFOC_sif407_V3.push(1);
+            } else {
+              this.SIFOC_sif407_V3.push(0);
+            }
+          });
+
+          this.collection407.forEach((item: any) =>
+            this.SetV_1.push(item.SetV_1)
+          );
+
+          this.collection407.forEach((item: any) =>
+            this.SetV_2.push(item.SetV_2)
+          );
         }
         if (this.collection === 'SIF_408') {
           this.isActive401 = false;
+          this.isActive402 = false;
+          this.isActive405 = false;
+          this.isActive407 = false;
+          this.isActive408 = true;
+          this.isActive409 = false;
           this.collection408 = response;
+
           this.collection408.forEach((item: any) => {
-            this.time408.push(new Date(item.Time.$date));
+            this.time408.push(item.Time);
           });
+
+          this.collection408.forEach((item: any) => {
+            this.SIFOC_sif408_ROBOT.push(item.SIFOC_sif408_ROBOT);
+          });
+
+          this.collection408.forEach((item: any) =>
+            this.SetV_1.push(item.SetV_1)
+          );
+
+          this.collection408.forEach((item: any) =>
+            this.SetV_2.push(item.SetV_2)
+          );
         }
         if (this.collection === 'SIF_409') {
           this.isActive401 = false;
+          this.isActive402 = false;
+          this.isActive405 = false;
+          this.isActive407 = false;
+          this.isActive408 = false;
+          this.isActive409 = true;
           this.collection409 = response;
+
           this.collection409.forEach((item: any) => {
-            this.time409.push(new Date(item.Time.$date));
+            this.time409.push(item.Time);
+          });
+
+          this.collection409.forEach((item: any) => {
+            this.SIFOC_sif409_LEC.push(item.SIFOC_sif409_LEC);
+          });
+
+          this.collection409.forEach((item: any) => {
+            this.SetV.push(item.SetV);
           });
         }
         this.clearVariables();
-        this.updateCollection(this.collectionData);
+        this.setDataInTable(this.collectionData);
       });
   }
 
-  updateCollection(dataCollect: any) {
+  setDataInTable(dataCollect: any) {
     this.showNewCollections = [];
     for (let collect of dataCollect) {
       let tmp: SifocVariables = {
@@ -420,9 +528,9 @@ export class GridComponent implements OnInit {
         MESPAEA_rPowerFactor: Number(collect.MESPAEA_rPowerFactor?.toFixed(3)),
         MESPAEA_rActivePower: Number(collect.MESPAEA_rActivePower),
         MESPAEA_udiEnergyConsumed: Number(collect.MESPAEA_udiEnergyConsumed),
-        MESPAEA_rAir: Number(collect?.MESPAEA_rAir),
+        MESPAEA_rAir: Number(collect?.MESPAEA_rAir?.toFixed(3)),
         MESPAEA_udiAirConsumed: Number(collect?.MESPAEA_udiAirConsumed),
-        Time: new Date(collect.Time?.$date),
+        Time: collect.Time,
         Alarma: collect.Alarma,
         SIFOC_sif401_LEC: collect?.SIFOC_sif401_LEC,
         SIFOC_sif402_LEC: collect?.SIFOC_sif402_LEC,
@@ -814,17 +922,18 @@ export class GridComponent implements OnInit {
       this.isCheckedVol = this.isChecked;
       if (this.collectionToShow === 'SIF_401') {
         console.log('pintar voltaje sif1');
+        console.log(this.collection401);
         this.collection401.forEach((element: any) =>
-          this.rVoltage.push(Number(element.MESPAEA_rVoltage?.toFixed(4)))
+          this.rVoltage.push(Number(element.MESPAEA_rVoltage))
         );
-        console.log(this.time401.length);
+        console.log(this.rVoltage);
+        console.log(this.time401);
         this.time402 = [];
         this.time405 = [];
         this.time407 = [];
         this.time408 = [];
         this.time409 = [];
         this.graph.data[0].x = this.time401;
-        console.log(this.rVoltage);
         this.graph.data[0].y = this.normalize(this.rVoltage);
         this.graphConfiguration(variable);
       }
@@ -1591,6 +1700,132 @@ export class GridComponent implements OnInit {
       console.log('borrar SetV_2');
       this.graph.data[9].x = [];
       this.graph.data[9].y = [];
+    }
+  }
+
+  selectGraphAuxSif407(event: any) {
+    const isChecked_ = event.target.checked;
+    let variable = event.target.value;
+    if (variable === 'SIFOC_sif407_V1' && isChecked_) {
+      console.log('entra 407');
+      this.isCheckedSIFOC_sif407_V1 = this.isChecked_;
+      this.graph.data[15].x = this.time407;
+      console.log(this.SIFOC_sif407_V1);
+      this.graph.data[15].y = this.SIFOC_sif407_V1;
+    } else if (variable === 'SIFOC_sif407_V1' && !isChecked_) {
+      console.log('borrar SIFOC_sif407_V1');
+      this.graph.data[15].x = [];
+      this.graph.data[15].y = [];
+    }
+
+    if (variable === 'SIFOC_sif407_V2' && isChecked_) {
+      this.isCheckedSIFOC_sif407_V2 = isChecked_;
+      this.graph.data[16].x = this.time407;
+      this.graph.data[16].y = this.SIFOC_sif407_V2;
+    } else if (variable === 'SIFOC_sif407_V2' && !isChecked_) {
+      console.log('borrar SIFOC_sif407_V2');
+      this.graph.data[16].x = [];
+      this.graph.data[16].y = [];
+    }
+
+    if (variable === 'SIFOC_sif407_V3' && isChecked_) {
+      this.isCheckedSIFOC_sif405_V2 = isChecked_;
+      this.graph.data[17].x = this.time407;
+      this.graph.data[17].y = this.SIFOC_sif407_V2;
+    } else if (variable === 'SIFOC_sif407_V2' && !isChecked_) {
+      console.log('borrar SIFOC_sif407_V2');
+      this.graph.data[17].x = [];
+      this.graph.data[17].y = [];
+    }
+
+    if (variable === 'SetV_1' && isChecked_) {
+      console.log('entra setv1');
+      this.isCheckedSetV_1 = isChecked_;
+      this.graph.data[8].x = this.time407;
+      console.log(this.SetV_1);
+      this.graph.data[8].y = this.normalize(this.SetV_1);
+    } else if (variable === 'SetV_1' && !isChecked_) {
+      console.log('borrar SetV_1');
+      this.graph.data[8].x = [];
+      this.graph.data[8].y = [];
+    }
+
+    if (variable === 'SetV_2' && isChecked_) {
+      console.log('entra setv2');
+      this.isCheckedSetV_2 = isChecked_;
+      this.graph.data[9].x = this.time407;
+      console.log(this.SetV_2);
+      this.graph.data[9].y = this.normalize(this.SetV_2);
+    } else if (variable === 'SetV_2' && !isChecked_) {
+      console.log('borrar SetV_2');
+      this.graph.data[9].x = [];
+      this.graph.data[9].y = [];
+    }
+  }
+
+  selectGraphAuxSif408(event: any) {
+    const isChecked_ = event.target.checked;
+    let variable = event.target.value;
+
+    if (variable === 'SIFOC_sif408_ROBOT' && isChecked_) {
+      this.isCheckedSIFOC_sif408_ROBOT = isChecked_;
+      this.graph.data[18].x = this.time408;
+      this.graph.data[18].y = this.normalize(this.SIFOC_sif408_ROBOT);
+    } else if (variable === 'SIFOC_sif408_ROBOT' && !isChecked_) {
+      console.log('borrar SIFOC_sif408_ROBOT');
+      this.graph.data[18].x = [];
+      this.graph.data[18].y = [];
+    }
+
+    if (variable === 'SetV_1' && isChecked_) {
+      console.log('entra setv1');
+      this.isCheckedSetV_1 = isChecked_;
+      this.graph.data[8].x = this.time408;
+      console.log(this.SetV_1);
+      this.graph.data[8].y = this.normalize(this.SetV_1);
+    } else if (variable === 'SetV_1' && !isChecked_) {
+      console.log('borrar SetV_1');
+      this.graph.data[8].x = [];
+      this.graph.data[8].y = [];
+    }
+
+    if (variable === 'SetV_2' && isChecked_) {
+      console.log('entra setv2');
+      this.isCheckedSetV_2 = isChecked_;
+      this.graph.data[9].x = this.time408;
+      console.log(this.SetV_2);
+      this.graph.data[9].y = this.normalize(this.SetV_2);
+    } else if (variable === 'SetV_2' && !isChecked_) {
+      console.log('borrar SetV_2');
+      this.graph.data[9].x = [];
+      this.graph.data[9].y = [];
+    }
+  }
+
+  selectGraphAuxSif409(event: any) {
+    const isChecked_ = event.target.checked;
+    let variable = event.target.value;
+
+    if (variable === 'SIFOC_sif409_LEC' && isChecked_) {
+      this.isCheckedSIFOC_sif409_LEC = isChecked_;
+      this.graph.data[19].x = this.time409;
+      this.graph.data[19].y = this.normalize(this.SIFOC_sif409_LEC);
+    } else if (variable === 'SIFOC_sif409_LEC' && !isChecked_) {
+      console.log('borrar SIFOC_sif409_LEC');
+      this.graph.data[19].x = [];
+      this.graph.data[19].y = [];
+    }
+
+    if (variable === 'SetV' && isChecked_) {
+      console.log('entra setV');
+      this.isCheckedSetV = isChecked_;
+      this.graph.data[20].x = this.time409;
+      console.log(this.SetV);
+      this.graph.data[20].y = this.normalize(this.SetV);
+    } else if (variable === 'SetV' && !isChecked_) {
+      console.log('borrar SetV');
+      this.graph.data[20].x = [];
+      this.graph.data[20].y = [];
     }
   }
 }
