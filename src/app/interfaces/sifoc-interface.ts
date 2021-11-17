@@ -34,7 +34,7 @@ export interface dataCore {
   name?: string;
   mode?: string;
   marker?: {};
-  title?: string
+  title?: string;
 }
 
 export interface dataPlot {
@@ -115,4 +115,11 @@ export interface ISuperset {
   Time_y?: [];
   Time_x?: [];
   Tiempo?: number[];
+}
+
+export interface IRegression {
+  coeff?: number[];
+  pvals?: number[];
+  conf_lower?: number[];
+  conf_higher?: number[];
 }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IRegression } from 'src/app/interfaces/sifoc-interface';
 
 @Injectable({
   providedIn: 'root',
@@ -21,5 +22,10 @@ export class StatisticService {
     const url = `${this.apiUrl}/superset`;
     console.log(url);
     return this.http.get(url);
+  }
+
+  getRegression(entries: any): Observable<IRegression[]> {
+    const url = `${this.apiUrl}/regresion`;
+    return this.http.post<IRegression[]>(url, entries);
   }
 }
