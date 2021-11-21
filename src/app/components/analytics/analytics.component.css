@@ -72,4 +72,6 @@
     pointer-events: none;
     opacity: 0.4;
   }
-  
+  .spinner {
+    margin: 0 auto;
+  }

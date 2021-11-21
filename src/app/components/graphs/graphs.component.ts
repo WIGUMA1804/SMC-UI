@@ -133,7 +133,7 @@ export class GraphsComponent implements OnInit {
   SetV_2_407: number[] = [];
   SetV_2_408: number[] = [];
   SetV_409: number[] = [];
-  tiempo: number[] = [];
+  Tiempo: number[] = [];
   time: any[] = [];
   setLists: dataCore[] = [
     /**
@@ -506,7 +506,7 @@ export class GraphsComponent implements OnInit {
     // this.time.sort();
 
     array.Tiempo?.forEach((item: any) => {
-      this.tiempo.push(item);
+      this.Tiempo.push(item);
     });
   }
 
