@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-import { dataPlot, IRegression } from '../../interfaces/sifoc-interface';
+import {
+  dataCore,
+  dataPlot,
+  IRegression,
+} from '../../interfaces/sifoc-interface';
 import { StatisticService } from '../services/basic-statistic.service';
 
 @Component({
@@ -67,27 +71,48 @@ export class AnalyticsComponent implements OnInit {
     'MESPAEA_udiEnergyConsumed_409',
   ];
 
+  dataCore: dataCore[] = [
+    {
+      x: [],
+      y: [],
+      type: '',
+      mode: '',
+      marker: {},
+    },
+    {
+      x: [],
+      y: [],
+      type: '',
+      mode: '',
+      marker: {},
+    },
+    {
+      x: [],
+      y: [],
+      type: '',
+      mode: '',
+      marker: {},
+    },
+    {
+      x: [],
+      y: [],
+      type: '',
+      mode: '',
+      marker: {},
+    },
+  ];
+
   public graph: dataPlot = {
-    data: [
-      {
-        x: [],
-        y: [],
-        type: '',
-        mode: '',
-        marker: {},
-      },
-      {
-        x: [],
-        y: [],
-        type: '',
-        mode: '',
-        marker: {},
-      },
-    ],
-    layout: { width: 1500, height: 400, title: 'Regression result' },
+    data: this.dataCore,
+    layout: {
+      width: 1700,
+      height: 800,
+      title: 'Regression results',
+    },
   };
 
   inputs = ['Tiempo'];
+  inputsToShow = ['Const', 'Tiempo'];
   outputSelected = '';
   inputSelected = '';
   regression: IRegression[] = [];
@@ -98,10 +123,16 @@ export class AnalyticsComponent implements OnInit {
   conf_higher = [];
   response: IRegression[] = [];
   loading = false;
+  ytrain = [];
+  predictionTrain = [];
+  residuos = [];
+  indices: number[] = [];
 
   constructor(private statisticService: StatisticService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.setIndices();
+  }
 
   getInput(e: any) {
     this.inputSelected = e.target.value;
@@ -115,6 +146,7 @@ export class AnalyticsComponent implements OnInit {
 
   addInput() {
     this.inputs.push(this.inputSelected);
+    this.inputsToShow.push(this.inputSelected);
     console.log(this.inputs);
   }
 
@@ -129,7 +161,16 @@ export class AnalyticsComponent implements OnInit {
     if (index !== -1) this.inputs.splice(index, 1);
   }
 
+  clearData() {
+    this.graph.data[0].x = [];
+    this.graph.data[0].y = [];
+
+    this.graph.data[1].x = [];
+    this.graph.data[1].y = [];
+  }
+
   getRegression() {
+    this.clearData();
     this.loading = true;
     const entries = {
       inputs: this.inputs,
@@ -142,11 +183,51 @@ export class AnalyticsComponent implements OnInit {
         this.regression = resp;
         console.log(this.regression);
         this.regressionResponse = this.json2array(this.regression);
+
         this.coeff = this.regressionResponse[0];
         this.pvals = this.regressionResponse[1];
         this.conf_lower = this.regressionResponse[2];
         this.conf_higher = this.regressionResponse[3];
+        this.ytrain = this.regressionResponse[4];
+        // this.predictionTrain = this.regressionResponse[5];
+
+        this.predictionTrain = this.json2array(this.regressionResponse[5]);
+        // this.residuos = this.regressionResponse[6];
+        this.residuos = this.json2array(this.regressionResponse[6]);
+
+        this.graph.data[0].x = this.indices;
+        this.graph.data[0].y = this.residuos;
+
+        console.log(this.indices.length);
+
+        // this.graph.data[1].x = this.ytrain;
+        // this.graph.data[1].y = this.predictionTrain;
+
+        this.graphConf();
+        console.log(this.ytrain);
+        console.log(this.residuos);
+        console.log(this.predictionTrain);
+        console.log(this.ytrain.length);
+        console.log(this.predictionTrain.length);
       });
+  }
+
+  setIndices() {
+    for (var i = 1; i <= 965; i++) {
+      this.indices.push(i);
+    }
+  }
+
+  graphConf() {
+    this.graph.data[0].type = 'scatter';
+    this.graph.data[0].mode = 'lines+points';
+    this.graph.data[0].marker = { color: 'red' };
+    this.graph.data[0].name = 'Real';
+
+    this.graph.data[1].type = 'scatter';
+    this.graph.data[1].mode = 'markers';
+    this.graph.data[1].marker = { color: 'blue' };
+    this.graph.data[1].name = 'Prediction';
   }
 
   json2array(json: any) {
@@ -156,5 +237,14 @@ export class AnalyticsComponent implements OnInit {
       result.push(json[key]);
     });
     return result;
+  }
+
+  normalize(array: any) {
+    const min = array?.reduce((n?: any, m?: any) => Math.min(n, m));
+    console.log(min);
+    const max = array.reduce((n: any, m: any) => Math.max(n, m));
+    console.log(max);
+    const delta = max - min;
+    return array.map((value: any) => (value - min) / delta);
   }
 }

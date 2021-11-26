@@ -86,7 +86,13 @@
   class="spinner-grow text-success spinner"
   role="status"
   *ngIf="loading"
-  style="display: flex; justify-content: center; height: 5vh; width: 5vh; padding-bottom: 10px;"
+  style="
+    display: flex;
+    justify-content: center;
+    height: 5vh;
+    width: 5vh;
+    padding-bottom: 10px;
+  "
 ></div>
 
 <div
@@ -103,9 +109,20 @@
   <div style="display: flex; flex-direction: row">
     <div style="margin-right: 20vh">
       <p style="font-weight: bold">coeff:</p>
-      <ul *ngFor="let item of coeff">
-        <li>{{ item }}</li>
-      </ul>
+
+      <div style="display: flex; flex-direction: row">
+        <div>
+          <div *ngFor="let i of inputsToShow" style="margin-bottom: 16px">
+            <span style="font-weight: bold"> {{ i }} </span>
+          </div>
+        </div>
+
+        <div>
+          <ul *ngFor="let item of coeff">
+            <li style="margin-left: 20px">{{ item }}</li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div style="margin-right: 20vh">
       <p style="font-weight: bold">pvals:</p>
@@ -128,6 +145,6 @@
   </div>
 </div>
 
-<div style="display: flex; justify-content: center; margin-top: 5vh;">
+<div style="display: flex; justify-content: center; margin-top: 5vh">
   <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>'
 </div>
