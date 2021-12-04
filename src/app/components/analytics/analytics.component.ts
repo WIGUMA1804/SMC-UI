@@ -86,13 +86,9 @@ export class AnalyticsComponent implements OnInit {
       mode: '',
       marker: {},
     },
-    {
-      x: [],
-      y: [],
-      type: '',
-      mode: '',
-      marker: {},
-    },
+  ];
+
+  dataCoreResiduos: dataCore[] = [
     {
       x: [],
       y: [],
@@ -105,9 +101,18 @@ export class AnalyticsComponent implements OnInit {
   public graph: dataPlot = {
     data: this.dataCore,
     layout: {
-      width: 1700,
-      height: 800,
-      title: 'Regression results',
+      width: 900,
+      height: 550,
+      title: 'Prediction v.s Real',
+    },
+  };
+
+  public graphResiduos: dataPlot = {
+    data: this.dataCoreResiduos,
+    layout: {
+      width: 900,
+      height: 550,
+      title: 'Residuos',
     },
   };
 
@@ -189,19 +194,20 @@ export class AnalyticsComponent implements OnInit {
         this.conf_lower = this.regressionResponse[2];
         this.conf_higher = this.regressionResponse[3];
         this.ytrain = this.regressionResponse[4];
-        // this.predictionTrain = this.regressionResponse[5];
+        this.predictionTrain = this.regressionResponse[5];
 
         this.predictionTrain = this.json2array(this.regressionResponse[5]);
         // this.residuos = this.regressionResponse[6];
         this.residuos = this.json2array(this.regressionResponse[6]);
 
-        this.graph.data[0].x = this.indices;
-        this.graph.data[0].y = this.residuos;
+        this.graph.data[0].x = this.ytrain;
+        this.graph.data[0].y = this.ytrain;
 
-        console.log(this.indices.length);
+        this.graph.data[1].x = this.ytrain;
+        this.graph.data[1].y = this.predictionTrain;
 
-        // this.graph.data[1].x = this.ytrain;
-        // this.graph.data[1].y = this.predictionTrain;
+        this.graphResiduos.data[0].x = this.indices;
+        this.graphResiduos.data[0].y = this.residuos;
 
         this.graphConf();
         console.log(this.ytrain);
@@ -228,6 +234,11 @@ export class AnalyticsComponent implements OnInit {
     this.graph.data[1].mode = 'markers';
     this.graph.data[1].marker = { color: 'blue' };
     this.graph.data[1].name = 'Prediction';
+
+    this.graphResiduos.data[0].type = 'scatter';
+    this.graphResiduos.data[0].mode = 'markers';
+    this.graphResiduos.data[0].marker = { color: 'green' };
+    this.graphResiduos.data[0].name = 'Residuos';
   }
 
   json2array(json: any) {
