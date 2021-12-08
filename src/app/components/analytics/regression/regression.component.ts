@@ -4,13 +4,13 @@ import {
   dataCore,
   dataPlot,
   IRegression,
-} from '../../interfaces/sifoc-interface';
-import { StatisticService } from '../services/basic-statistic.service';
+} from '../../../interfaces/sifoc-interface';
+import { StatisticService } from '../../services/basic-statistic.service';
 
 @Component({
-  selector: 'app-analytics',
-  templateUrl: './analytics.component.html',
-  styleUrls: ['./analytics.component.css'],
+  selector: 'app-regression',
+  templateUrl: './regression.component.html',
+  styleUrls: ['./regression.component.css'],
 })
 export class AnalyticsComponent implements OnInit {
   displayedInputs: string[] = [

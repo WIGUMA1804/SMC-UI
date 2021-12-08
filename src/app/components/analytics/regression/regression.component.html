@@ -1,4 +1,7 @@
-<div class="dropdown-content-graph" style="padding-left: 20px; margin-bottom: 15px">
+<div
+  class="dropdown-content-graph"
+  style="padding-left: 20px; margin-bottom: 15px"
+>
   <p>Select entries:</p>
   <div style="display: flex; flex-direction: row">
     <select class="browser-default custom-select" (change)="getInput($event)">
@@ -9,24 +12,30 @@
         {{ variable }}
       </option>
     </select>
-    <button (click)="addInput()" style="
+    <button
+      (click)="addInput()"
+      style="
         font-size: 18px;
         width: 25px;
         height: 25px;
         border-radius: 15px;
         background-color: chartreuse;
         font-weight: bold;
-      ">
+      "
+    >
       +
     </button>
-    <button (click)="removeInput()" style="
+    <button
+      (click)="removeInput()"
+      style="
         font-size: 22px;
         width: 25px;
         height: 25px;
         border-radius: 15px;
         background-color: indianred;
         font-weight: bold;
-      ">
+      "
+    >
       -
     </button>
   </div>
@@ -37,7 +46,10 @@
   </div>
 </div>
 
-<div class="dropdown-content-graph" style="padding-left: 20px; margin-bottom: 15px">
+<div
+  class="dropdown-content-graph"
+  style="padding-left: 20px; margin-bottom: 15px"
+>
   <p>Select output:</p>
   <div style="display: flex; flex-direction: row">
     <select class="browser-default custom-select" (change)="getOutput($event)">
@@ -50,8 +62,13 @@
     </select>
   </div>
 </div>
-<div class="dropdown-content-graph" style="padding-left: 10px; margin-top: 30px">
-  <button (click)="launchRegression()" style="
+<div
+  class="dropdown-content-graph"
+  style="padding-left: 10px; margin-top: 30px"
+>
+  <button
+    (click)="launchRegression()"
+    style="
       width: 25vh;
       height: 3vh;
       font-size: 20px;
@@ -59,26 +76,34 @@
       font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
         'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
       background-color: lightblue;
-    ">
+    "
+  >
     LAUNCH REGRESSION
   </button>
 </div>
 
-<div class="spinner-grow text-success spinner" role="status" *ngIf="loading" style="
+<div
+  class="spinner-grow text-success spinner"
+  role="status"
+  *ngIf="loading"
+  style="
     display: flex;
     justify-content: center;
     height: 5vh;
     width: 5vh;
     padding-bottom: 10px;
-  "></div>
+  "
+></div>
 
-<div style="
+<div
+  style="
     margin-top: 5vh;
     padding: 0 15px 0 15px;
     border: solid 1px black;
     width: 180vh;
     margin: 0 auto;
-  ">
+  "
+>
   <h2 style="padding-top: 10px">Result</h2>
   <hr />
   <div style="display: flex; flex-direction: row">
@@ -119,14 +144,16 @@
     </div>
   </div>
 </div>
-<div style="display: flex;flex-direction: row;">
-
+<div style="display: flex; flex-direction: row; justify-content: center">
   <div style="display: flex; justify-content: left; margin-top: 5vh">
     <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>'
   </div>
 
   <div style="display: flex; justify-content: left; margin-top: 5vh">
-    <plotly-plot [data]="graphResiduos.data" [layout]="graphResiduos.layout"></plotly-plot>'
+    <plotly-plot
+      [data]="graphResiduos.data"
+      [layout]="graphResiduos.layout"
+    ></plotly-plot
+    >'
   </div>
-
 </div>

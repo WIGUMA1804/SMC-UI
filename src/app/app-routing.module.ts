@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GridComponent } from './components/basic-statistics/grid/grid.component';
-import { AnalyticsComponent } from './components/analytics/analytics.component';
+import { AnalyticsComponent } from './components/analytics/regression/regression.component';
 import { GraphsComponent } from './components/graphs/graphs.component';
 
 const routes: Routes = [
