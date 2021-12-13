@@ -1,6 +1,6 @@
 <div class="main-content">
-  <p style="font-style: oblique; font-size: 12px; color: red">
-    Data per collection
+  <p style="font-weight: bold; font-size: 14px; color: #6497b1">
+    Choose a collection
   </p>
   <div class="dropdown-content">
     <select
@@ -71,10 +71,8 @@
   </table>
 
   <div class="btn-content-pagination">
-    <button class="btn btn btn-secondary" (click)="previousPage()">
-      < -10
-    </button>
-    <button class="btn btn-secondary" (click)="nextPage()">+10 ></button>
+    <button class="btn btn-outline-info" style="font-size: 14px;" (click)="previousPage()"><</button>
+    <button class="btn btn-outline-info" style="font-size: 14px;" (click)="nextPage()">></button>
     <p class="page-label">page: {{ (page + 10) / 10 }} / {{ lenghtWindow }}</p>
   </div>
 </div>
@@ -88,7 +86,7 @@
     style="border: 1px solid gainsboro; padding: 15px; height: 63vh"
   >
     <div class="dropdown-content">
-      <p style="font-style: oblique; font-size: 12px; color: red">
+      <p style="font-size: 12px; color: #6497b1">
         Measures of central tendency associated with a collection
       </p>
       <p
@@ -96,8 +94,8 @@
           font-style: oblique;
           font-weight: bold;
           font-size: 12px;
-          color: red;
-          border: 1px solid red;
+          color: #6497b1;
+          border: 1px solid #6497b1;
           width: 15vh;
         "
       >
@@ -122,30 +120,30 @@
         <li>
           <p>
             Average:
-            <span style="font-weight: bold; color: red">{{ average }}</span>
+            <span style="font-weight: bold; color: #6497b1">{{ average }}</span>
           </p>
         </li>
         <li>
           <p>
             Median:
-            <span style="font-weight: bold; color: red">{{ median }}</span>
+            <span style="font-weight: bold; color: #6497b1">{{ median }}</span>
           </p>
         </li>
         <li>
           <p>
-            Mode: <span style="font-weight: bold; color: red">{{ mode }}</span>
+            Mode: <span style="font-weight: bold; color: #6497b1">{{ mode }}</span>
           </p>
         </li>
         <li>
           <p>
             Variance:
-            <span style="font-weight: bold; color: red">{{ variance }}</span>
+            <span style="font-weight: bold; color: #6497b1">{{ variance }}</span>
           </p>
         </li>
         <li>
           <p>
             Standard deviation:
-            <span style="font-weight: bold; color: red">{{ deviation }}</span>
+            <span style="font-weight: bold; color: #6497b1">{{ deviation }}</span>
           </p>
         </li>
       </div>

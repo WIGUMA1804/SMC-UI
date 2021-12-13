@@ -15,15 +15,13 @@ table {
 .btn-content-pagination {
   display: flex;
   flex-direction: row;
-  margin: 0px;
-  padding: 0px;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: left;
 }
 
 button {
-  margin-left: 10px;
-  width: 50px;
-  height: 30px;
-  font-size: 9px;
+  margin-left: 5px;
 }
 
 .label-title-table {

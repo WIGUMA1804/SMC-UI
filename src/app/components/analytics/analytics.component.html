@@ -1,12 +1,41 @@
 <div
+  class="btn-group"
+  role="group"
+  aria-label="Basic example"
+  style="width: 20%; margin-bottom: 2vh; margin-left: 10px"
+>
+  <button
+    type="button"
+    class="btn btn-outline-info"
+    style="font-size: 16px; height: 10%"
+    (click)="onClickRegression()"
+  >
+    Regression
+  </button>
+  <button
+    type="button"
+    class="btn btn-outline-info"
+    style="font-size: 16px; height: 10%"
+    (click)="onClickNeuronal()"
+  >
+    Neuronal Network
+  </button>
+</div>
+
+<div
   class="dropdown-content-graph"
   style="padding-left: 20px; margin-bottom: 15px"
 >
-  <p>Select entries:</p>
+  <p style="color: #5a5a5a">Select entries:</p>
   <div style="display: flex; flex-direction: row">
     <select class="browser-default custom-select" (change)="getInput($event)">
       <option selected value="default" disabled>
-        Select input to regression
+        <span *ngIf="regressionTemplate">
+          Select input to {{ regressionLabel }}
+        </span>
+        <span *ngIf="neuronalTemplate">
+          Select input to {{ neuronalLabel }}
+        </span>
       </option>
       <option *ngFor="let variable of displayedInputs" [value]="variable">
         {{ variable }}
@@ -40,7 +69,7 @@
     </button>
   </div>
   <div *ngFor="let input of inputs">
-    <div style="color: red; font-weight: bold">
+    <div style="color: #6497b1; font-weight: bold">
       {{ input &nbsp; }}
     </div>
   </div>
@@ -50,11 +79,16 @@
   class="dropdown-content-graph"
   style="padding-left: 20px; margin-bottom: 15px"
 >
-  <p>Select output:</p>
+  <p style="color: #5a5a5a">Select output:</p>
   <div style="display: flex; flex-direction: row">
     <select class="browser-default custom-select" (change)="getOutput($event)">
       <option selected value="default" disabled>
-        Select output to regression
+        <span *ngIf="regressionTemplate">
+          Select output to {{ regressionLabel }}
+        </span>
+        <span *ngIf="neuronalTemplate">
+          Select output to {{ neuronalLabel }}
+        </span>
       </option>
       <option *ngFor="let variable of displayedOutputs" [value]="variable">
         {{ variable }}
@@ -78,7 +112,12 @@
       background-color: lightblue;
     "
   >
-    LAUNCH REGRESSION
+    <span style="text-transform: uppercase" *ngIf="regressionTemplate"
+      >launch {{ regressionLabel }}</span
+    >
+    <span style="text-transform: uppercase" *ngIf="neuronalTemplate">
+      launch {{ neuronalLabel }}</span
+    >
   </button>
 </div>
 
@@ -96,6 +135,7 @@
 ></div>
 
 <div
+  *ngIf="regressionTemplate"
   style="
     margin-top: 5vh;
     padding: 0 15px 0 15px;
@@ -144,7 +184,11 @@
     </div>
   </div>
 </div>
-<div style="display: flex; flex-direction: row; justify-content: center">
+
+<div
+  style="display: flex; flex-direction: row; justify-content: center"
+  *ngIf="regressionTemplate"
+>
   <div style="display: flex; justify-content: left; margin-top: 5vh">
     <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>'
   </div>

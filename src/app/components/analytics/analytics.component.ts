@@ -4,13 +4,13 @@ import {
   dataCore,
   dataPlot,
   IRegression,
-} from '../../../interfaces/sifoc-interface';
-import { StatisticService } from '../../services/basic-statistic.service';
+} from '../../interfaces/sifoc-interface';
+import { StatisticService } from '../services/basic-statistic.service';
 
 @Component({
-  selector: 'app-regression',
-  templateUrl: './regression.component.html',
-  styleUrls: ['./regression.component.css'],
+  selector: 'app-analytics',
+  templateUrl: './analytics.component.html',
+  styleUrls: ['./analytics.component.css'],
 })
 export class AnalyticsComponent implements OnInit {
   displayedInputs: string[] = [
@@ -132,6 +132,10 @@ export class AnalyticsComponent implements OnInit {
   predictionTrain = [];
   residuos = [];
   indices: number[] = [];
+  regressionTemplate = true;
+  neuronalTemplate = false;
+  regressionLabel = 'regression';
+  neuronalLabel = 'neuronal';
 
   constructor(private statisticService: StatisticService) {}
 
@@ -257,5 +261,17 @@ export class AnalyticsComponent implements OnInit {
     console.log(max);
     const delta = max - min;
     return array.map((value: any) => (value - min) / delta);
+  }
+
+  onClickRegression() {
+    console.log('regression');
+    this.regressionTemplate = true;
+    this.neuronalTemplate = false;
+  }
+
+  onClickNeuronal() {
+    console.log('neuronal');
+    this.regressionTemplate = false;
+    this.neuronalTemplate = true;
   }
 }
