@@ -6,6 +6,7 @@ import {
   IRegression,
 } from '../../interfaces/sifoc-interface';
 import { StatisticService } from '../services/basic-statistic.service';
+import { INeuronal } from '../../interfaces/sifoc-interface';
 
 @Component({
   selector: 'app-analytics',
@@ -116,7 +117,8 @@ export class AnalyticsComponent implements OnInit {
     },
   };
 
-  inputs = ['Tiempo'];
+  inputsReg = ['Tiempo'];
+  inputsNeu: string[] = [];
   inputsToShow = ['Const', 'Tiempo'];
   outputSelected = '';
   inputSelected = '';
@@ -136,6 +138,10 @@ export class AnalyticsComponent implements OnInit {
   neuronalTemplate = false;
   regressionLabel = 'regression';
   neuronalLabel = 'neuronal';
+  r2_score: number = 0;
+  mean_squared: number = 0;
+  model_score: number = 0;
+  model_params = {};
 
   constructor(private statisticService: StatisticService) {}
 
@@ -154,20 +160,38 @@ export class AnalyticsComponent implements OnInit {
   }
 
   addInput() {
-    this.inputs.push(this.inputSelected);
+    if (this.regressionTemplate) {
+      this.inputsReg.push(this.inputSelected);
+    } else {
+      this.inputsNeu.push(this.inputSelected);
+    }
     this.inputsToShow.push(this.inputSelected);
-    console.log(this.inputs);
   }
 
   launchRegression() {
-    console.log(this.inputs, this.outputSelected);
-    this.getRegression();
+    if (this.regressionTemplate) {
+      console.log('regresion');
+      console.log(this.inputsReg, this.outputSelected);
+      this.getRegression();
+    }
+
+    if (this.neuronalTemplate) {
+      console.log('neuronal');
+      console.log(this.inputsNeu, this.outputSelected);
+      this.getNeuronal();
+    }
   }
 
   removeInput() {
-    let index = this.inputs.indexOf(this.inputSelected);
-    console.log(index);
-    if (index !== -1) this.inputs.splice(index, 1);
+    if (this.regressionTemplate) {
+      let index = this.inputsReg.indexOf(this.inputSelected);
+      console.log(index);
+      if (index !== -1) this.inputsReg.splice(index, 1);
+    } else {
+      let index = this.inputsNeu.indexOf(this.inputSelected);
+      console.log(index);
+      if (index !== -1) this.inputsNeu.splice(index, 1);
+    }
   }
 
   clearData() {
@@ -182,7 +206,7 @@ export class AnalyticsComponent implements OnInit {
     this.clearData();
     this.loading = true;
     const entries = {
-      inputs: this.inputs,
+      inputs: this.inputsReg,
       output: this.outputSelected,
     };
     this.statisticService
@@ -219,6 +243,29 @@ export class AnalyticsComponent implements OnInit {
         console.log(this.predictionTrain);
         console.log(this.ytrain.length);
         console.log(this.predictionTrain.length);
+      });
+  }
+
+  getNeuronal() {
+    this.loading = true;
+    const entries = {
+      inputs: this.inputsNeu,
+      output: this.outputSelected,
+    };
+    this.statisticService
+      .getNeuronal(entries)
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe((resp: INeuronal) => {
+        this.r2_score = resp.r2_score;
+        this.mean_squared = resp.mean_squared;
+        this.model_score = resp.model_score;
+        this.model_params = JSON.stringify(resp.model_params);
+        console.log(
+          this.r2_score,
+          this.mean_squared,
+          this.model_score,
+          this.model_params
+        );
       });
   }
 

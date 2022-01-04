@@ -123,3 +123,12 @@ export interface IRegression {
   conf_lower?: number[];
   conf_higher?: number[];
 }
+
+export interface INeuronal {
+  r2_score: number;
+  mean_squared: number;
+  model_score: number;
+  model_params: {};
+  expected_y?: number[];
+  predicted_y?: number[];
+}

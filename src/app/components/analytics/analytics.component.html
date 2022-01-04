@@ -18,7 +18,7 @@
     style="font-size: 16px; height: 10%"
     (click)="onClickNeuronal()"
   >
-    Neuronal Network
+    Neuronal
   </button>
 </div>
 
@@ -68,9 +68,19 @@
       -
     </button>
   </div>
-  <div *ngFor="let input of inputs">
-    <div style="color: #6497b1; font-weight: bold">
-      {{ input &nbsp; }}
+  <div *ngIf="regressionTemplate">
+    <div *ngFor="let input of inputsReg">
+      <div style="color: #6497b1; font-weight: bold">
+        {{ input &nbsp; }}
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="neuronalTemplate">
+    <div *ngFor="let input of inputsNeu">
+      <div style="color: #6497b1; font-weight: bold">
+        {{ input &nbsp; }}
+      </div>
     </div>
   </div>
 </div>
@@ -199,5 +209,43 @@
       [layout]="graphResiduos.layout"
     ></plotly-plot
     >'
+  </div>
+</div>
+
+<div
+  *ngIf="neuronalTemplate"
+  style="
+    margin-top: 5vh;
+    padding: 0 15px 0 15px;
+    border: solid 1px black;
+    width: 180vh;
+    margin: 0 auto;
+  "
+>
+  <h2 style="padding-top: 10px">Result</h2>
+  <hr />
+
+  <div *ngIf="!loading">
+    <div style="display: flex">
+      <div style="margin-right: 20vh">
+        <p style="font-weight: bold">r2_score:</p>
+        <p>{{ r2_score }}</p>
+      </div>
+
+      <div style="margin-right: 20vh">
+        <p style="font-weight: bold">mean_squared:</p>
+        <p>{{ mean_squared }}</p>
+      </div>
+
+      <div style="margin-right: 20vh">
+        <p style="font-weight: bold">model_score:</p>
+        <p>{{ model_score }}</p>
+      </div>
+    </div>
+
+    <div style="margin-right: 20vh">
+      <p style="font-weight: bold">model_params:</p>
+      <p>{{ model_params }}</p>
+    </div>
   </div>
 </div>

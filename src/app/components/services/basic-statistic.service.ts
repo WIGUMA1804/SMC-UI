@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IRegression } from 'src/app/interfaces/sifoc-interface';
+import { INeuronal } from '../../interfaces/sifoc-interface';
 
 @Injectable({
   providedIn: 'root',
@@ -27,5 +28,10 @@ export class StatisticService {
   getRegression(entries: any): Observable<IRegression[]> {
     const url = `${this.apiUrl}/regresion`;
     return this.http.post<IRegression[]>(url, entries);
+  }
+
+  getNeuronal(entries: any): Observable<INeuronal> {
+    const url = `${this.apiUrl}/neuronal`;
+    return this.http.post<INeuronal>(url, entries);
   }
 }
