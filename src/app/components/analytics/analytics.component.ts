@@ -6,7 +6,10 @@ import {
   IRegression,
 } from '../../interfaces/sifoc-interface';
 import { StatisticService } from '../services/basic-statistic.service';
-import { INeuronal } from '../../interfaces/sifoc-interface';
+import {
+  INeuronal,
+  IKeyValuesNeuronal,
+} from '../../interfaces/sifoc-interface';
 
 @Component({
   selector: 'app-analytics',
@@ -119,6 +122,7 @@ export class AnalyticsComponent implements OnInit {
 
   inputsReg = ['Tiempo'];
   inputsNeu: string[] = [];
+  keyValuesNeuronal: IKeyValuesNeuronal[] = [];
   inputsToShow = ['Const', 'Tiempo'];
   outputSelected = '';
   inputSelected = '';
@@ -142,6 +146,11 @@ export class AnalyticsComponent implements OnInit {
   mean_squared: number = 0;
   model_score: number = 0;
   model_params = {};
+  finalArrayNeuronal: any[] = [];
+  aux: any[] = [];
+  activeSend = false;
+  result = '';
+  isPredict = false;
 
   constructor(private statisticService: StatisticService) {}
 
@@ -164,6 +173,8 @@ export class AnalyticsComponent implements OnInit {
       this.inputsReg.push(this.inputSelected);
     } else {
       this.inputsNeu.push(this.inputSelected);
+      const keyNeu = { name: this.inputSelected, value: 0 };
+      this.keyValuesNeuronal.push(keyNeu);
     }
     this.inputsToShow.push(this.inputSelected);
   }
@@ -177,6 +188,7 @@ export class AnalyticsComponent implements OnInit {
 
     if (this.neuronalTemplate) {
       console.log('neuronal');
+      this.isPredict =  false;
       console.log(this.inputsNeu, this.outputSelected);
       this.getNeuronal();
     }
@@ -225,7 +237,6 @@ export class AnalyticsComponent implements OnInit {
         this.predictionTrain = this.regressionResponse[5];
 
         this.predictionTrain = this.json2array(this.regressionResponse[5]);
-        // this.residuos = this.regressionResponse[6];
         this.residuos = this.json2array(this.regressionResponse[6]);
 
         this.graph.data[0].x = this.ytrain;
@@ -256,6 +267,8 @@ export class AnalyticsComponent implements OnInit {
       .getNeuronal(entries)
       .pipe(finalize(() => (this.loading = false)))
       .subscribe((resp: INeuronal) => {
+        console.log(resp);
+        this.isPredict = true
         this.r2_score = resp.r2_score;
         this.mean_squared = resp.mean_squared;
         this.model_score = resp.model_score;
@@ -320,5 +333,30 @@ export class AnalyticsComponent implements OnInit {
     console.log('neuronal');
     this.regressionTemplate = false;
     this.neuronalTemplate = true;
+  }
+
+  sendPredict() {
+    console.log(this.keyValuesNeuronal);
+    console.log(this.finalArrayNeuronal);
+    console.log(this.aux);
+
+    const entries = {
+      vector: this.aux,
+    };
+
+    this.statisticService.getPrediction(entries).subscribe((resp) => {
+      console.log(resp);
+      this.result = JSON.stringify(resp);
+    });
+  }
+
+  addElementsPredict() {
+    let auxArray: number[] = [];
+    this.keyValuesNeuronal.forEach((item) => {
+      auxArray.push(item.value);
+    });
+    this.aux.push(auxArray);
+    this.keyValuesNeuronal.forEach((item) => (item.value = 0));
+    this.activeSend = this.aux.length >= 2 ? true : false;
   }
 }

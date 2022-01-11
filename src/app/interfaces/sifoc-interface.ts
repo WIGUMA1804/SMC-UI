@@ -132,3 +132,12 @@ export interface INeuronal {
   expected_y?: number[];
   predicted_y?: number[];
 }
+
+export interface IKeyValuesNeuronal {
+  name: string;
+  value: number;
+}
+
+export interface IUserNeuronal {
+  data: IKeyValuesNeuronal[];
+}

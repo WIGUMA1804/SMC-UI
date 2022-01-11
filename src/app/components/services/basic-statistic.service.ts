@@ -34,4 +34,10 @@ export class StatisticService {
     const url = `${this.apiUrl}/neuronal`;
     return this.http.post<INeuronal>(url, entries);
   }
+
+  getPrediction(vector: any): Observable<any> {
+    const url = `${this.apiUrl}/modelPredict`;
+    console.log(vector)
+    return this.http.post<any>(url, vector);
+  }
 }

@@ -22,65 +22,117 @@
   </button>
 </div>
 
-<div
-  class="dropdown-content-graph"
-  style="padding-left: 20px; margin-bottom: 15px"
->
-  <p style="color: #5a5a5a">Select entries:</p>
-  <div style="display: flex; flex-direction: row">
-    <select class="browser-default custom-select" (change)="getInput($event)">
-      <option selected value="default" disabled>
-        <span *ngIf="regressionTemplate">
-          Select input to {{ regressionLabel }}
-        </span>
-        <span *ngIf="neuronalTemplate">
-          Select input to {{ neuronalLabel }}
-        </span>
-      </option>
-      <option *ngFor="let variable of displayedInputs" [value]="variable">
-        {{ variable }}
-      </option>
-    </select>
-    <button
-      (click)="addInput()"
-      style="
-        font-size: 18px;
-        width: 25px;
-        height: 25px;
-        border-radius: 15px;
-        background-color: chartreuse;
-        font-weight: bold;
-      "
-    >
-      +
-    </button>
-    <button
-      (click)="removeInput()"
-      style="
-        font-size: 22px;
-        width: 25px;
-        height: 25px;
-        border-radius: 15px;
-        background-color: indianred;
-        font-weight: bold;
-      "
-    >
-      -
-    </button>
-  </div>
-  <div *ngIf="regressionTemplate">
-    <div *ngFor="let input of inputsReg">
-      <div style="color: #6497b1; font-weight: bold">
-        {{ input &nbsp; }}
+<div style="display: flex; flex-direction: row; width: 300vh;">
+  <div
+    class="dropdown-content-graph"
+    style="padding-left: 20px; margin-bottom: 15px"
+  >
+    <p style="color: #5a5a5a">Select entries:</p>
+    <div style="display: flex; flex-direction: row">
+      <select class="browser-default custom-select" (change)="getInput($event)">
+        <option selected value="default" disabled>
+          <span *ngIf="regressionTemplate">
+            Select input to {{ regressionLabel }}
+          </span>
+          <span *ngIf="neuronalTemplate">
+            Select input to {{ neuronalLabel }}
+          </span>
+        </option>
+        <option *ngFor="let variable of displayedInputs" [value]="variable">
+          {{ variable }}
+        </option>
+      </select>
+      <button
+        (click)="addInput()"
+        style="
+          font-size: 18px;
+          width: 25px;
+          height: 25px;
+          border-radius: 15px;
+          background-color: chartreuse;
+          font-weight: bold;
+        "
+      >
+        +
+      </button>
+      <button
+        (click)="removeInput()"
+        style="
+          font-size: 22px;
+          width: 25px;
+          height: 25px;
+          border-radius: 15px;
+          background-color: indianred;
+          font-weight: bold;
+        "
+      >
+        -
+      </button>
+    </div>
+    <div *ngIf="regressionTemplate">
+      <div *ngFor="let input of inputsReg">
+        <div style="color: #6497b1; font-weight: bold">
+          {{ input &nbsp; }}
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="neuronalTemplate">
+      <div *ngFor="let input of inputsNeu">
+        <div style="color: #6497b1; font-weight: bold">
+          {{ input &nbsp; }}
+        </div>
       </div>
     </div>
   </div>
 
-  <div *ngIf="neuronalTemplate">
-    <div *ngFor="let input of inputsNeu">
-      <div style="color: #6497b1; font-weight: bold">
-        {{ input &nbsp; }}
+  <div style="display: flex; margin-left: 10vh; flex-wrap: nowrap;" *ngIf="isPredict && neuronalTemplate">
+    <div style="border: 1px solid lightgray; padding: 10px">
+      <p>Model predict:</p>
+      <div style="display: flex; flex-direction: column; flex-wrap: nowrap;">
+        <label
+          for=""
+          *ngFor="let entry of keyValuesNeuronal"
+          style="margin-top: 10px"
+        >
+          {{ entry.name }}
+          <input type="number" [(ngModel)]="entry.value" />
+        </label>
       </div>
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          margin-top: 2vh;
+          width: 100%;
+        "
+      >
+        <button
+          (click)="addElementsPredict()"
+          style="background-color: lightblue; width: 5vh; font-size: 12px"
+        >
+          Add
+        </button>
+        <button
+          (click)="sendPredict()"
+          style="background-color: lightblue; width: 5vh; font-size: 12px"
+          [disabled]="!activeSend"
+        >
+          send
+        </button>
+      </div>
+    </div>
+    <div style="margin-left: 2vh">
+      <p>Predict Array:</p>
+      <div>
+        <label *ngFor="let i of aux" style="margin-right: 10px">
+          [ [{{ i }}] ]</label
+        >
+      </div>
+    </div>
+    <div style="margin-left: 4vh">
+      <p style="display: flex; flex-direction: column">Result:</p>
+      <p>{{ result }}</p>
     </div>
   </div>
 </div>
@@ -106,6 +158,7 @@
     </select>
   </div>
 </div>
+
 <div
   class="dropdown-content-graph"
   style="padding-left: 10px; margin-top: 30px"
